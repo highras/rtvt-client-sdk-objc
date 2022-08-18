@@ -3,8 +3,9 @@ RTVT 使用文档
 
 * [版本支持](#版本支持)
 * [集成依赖](#集成依赖)
+* [登录](#登录)
 * [代理方法](#代理方法)
-* [接口](#接口)
+* [使用接口](#使用接口)
 
 <a id="版本支持">版本支持</a>
 ================
@@ -20,7 +21,21 @@ RTVT 使用文档
 * 添加库libresolv.9.tbd
 
 
+<a id="登录">登录</a>
+================ 
+```objc
 
++ (nullable instancetype)clientWithEndpoint:(nonnull NSString * )endpoint
+                                  projectId:(int64_t)projectId
+                                     userId:(int64_t)userId
+                                   delegate:(id <RTVTProtocol>)delegate;
+
+
+- (void)loginWithToken:(nonnull NSString *)token
+              authTime:(int64_t)authTime
+               success:(RTVTLoginSuccessCallBack)loginSuccess
+           connectFail:(RTVTLoginFailCallBack)loginFail;
+```
 
 <a id="代理方法">代理方法</a>
 ================
@@ -61,7 +76,7 @@ RTVT 使用文档
 
 
 
-<a id="接口">接口</a>
+<a id="使用接口">使用接口</a>
 ================
 ```objc
 /// 开始翻译 获取streamId
