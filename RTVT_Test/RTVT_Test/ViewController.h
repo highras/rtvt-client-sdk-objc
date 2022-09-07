@@ -20,8 +20,8 @@
 @property(nonatomic,strong)RTVTClient * client;
 @property(nonatomic,strong)dispatch_source_t sendTimer;
 @property(nonatomic,strong)NSMutableData * pcmData;
-@property(nonatomic,assign)int streamId;
-@property(nonatomic,assign)int seq;
+@property(nonatomic,assign)int64_t streamId;
+@property(nonatomic,assign)int64_t seq;
 @property(nonatomic,assign)int64_t authTime;
 @property(nonatomic,strong)NSString * authToken;
 @property(nonatomic,strong)NSString * srcLanguageString;

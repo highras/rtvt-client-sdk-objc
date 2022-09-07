@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @required
--(void)translatedResultWithStreamId:(int)streamId
+-(void)translatedResultWithStreamId:(int64_t)streamId
                             startTs:(int)startTs
                               endTs:(int)endTs
                              result:(NSString * _Nullable)result
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @optional
--(void)recognizedResultWithStreamId:(int)streamId
+-(void)recognizedResultWithStreamId:(int64_t)streamId
                             startTs:(int)startTs
                               endTs:(int)endTs
                              result:(NSString * _Nullable)result

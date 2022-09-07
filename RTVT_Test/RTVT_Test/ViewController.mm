@@ -192,9 +192,9 @@
         [self.client starStreamTranslateWithAsrResult:YES
                                           srcLanguage:self.srcLanguageButton.titleLabel.text
                                          destLanguage:self.destLanguageButton.titleLabel.text
-                                              success:^(int streamId) {
+                                              success:^(int64_t streamId) {
             
-            [self showHudMessage:[NSString stringWithFormat:@"获取streamId成功 id = %d 开始测试",streamId] hideTime:2];
+            [self showHudMessage:[NSString stringWithFormat:@"获取streamId成功 id = %lld 开始测试",streamId] hideTime:2];
             
             @synchronized (self) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -238,7 +238,7 @@
                                       lastSeq:self.seq
                                       success:^{
             
-        [self showHudMessage:[NSString stringWithFormat:@"结束发送 success = %d",self.streamId] hideTime:1];
+        [self showHudMessage:[NSString stringWithFormat:@"结束发送 success = %lld",self.streamId] hideTime:1];
             
             [self _endTimer];
             
@@ -269,7 +269,7 @@
 #pragma mark rtvt delegate
 //@required
 //语音翻译
--(void)translatedResultWithStreamId:(int)streamId
+-(void)translatedResultWithStreamId:(int64_t)streamId
                             startTs:(int)startTs
                               endTs:(int)endTs
                              result:(NSString * _Nullable)result
@@ -288,7 +288,7 @@
 
 //@optional
 //语音识别
--(void)recognizedResultWithStreamId:(int)streamId
+-(void)recognizedResultWithStreamId:(int64_t)streamId
                             startTs:(int)startTs
                               endTs:(int)endTs
                              result:(NSString * _Nullable)result

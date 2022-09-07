@@ -60,7 +60,7 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
 -(void)starStreamTranslateWithAsrResult:(BOOL)asrResult
                             srcLanguage:(nonnull NSString *)srcLanguage
                            destLanguage:(nonnull NSString *)destLanguage
-                                success:(void(^)(int streamId))successCallback
+                                success:(void(^)(int64_t streamId))successCallback
                                    fail:(RTVTAnswerFailCallBack)failCallback;
 
 /// 结束翻译 对应streamId
@@ -68,8 +68,8 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
 /// @param lastSeq seq
 /// @param successCallback 成功回调
 /// @param failCallback 失败回调
--(void)endTranslateWithStreamId:(int)streamId
-                        lastSeq:(int)lastSeq
+-(void)endTranslateWithStreamId:(int64_t)streamId
+                        lastSeq:(int64_t)lastSeq
                         success:(RTVTAnswerSuccessCallBack)successCallback
                            fail:(RTVTAnswerFailCallBack)failCallback;
 
@@ -81,9 +81,9 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
 /// @param ts 音频帧对应时间戳  毫秒 必传
 /// @param successCallback 成功回调
 /// @param failCallback 失败回调
--(void)sendVoiceWithStreamId:(int)streamId
+-(void)sendVoiceWithStreamId:(int64_t)streamId
                    voiceData:(nonnull NSData*)voiceData
-                         seq:(int)seq
+                         seq:(int64_t)seq
                           ts:(int)ts
                      success:(RTVTAnswerSuccessCallBack)successCallback
                         fail:(RTVTAnswerFailCallBack)failCallback;
