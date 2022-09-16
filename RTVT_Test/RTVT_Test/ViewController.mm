@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "ViewController+UI.h"
-#import "ViewController+Token.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
 @interface ViewController ()
@@ -29,7 +28,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.langArray = [NSArray arrayWithObjects:@"zh",@"en",@"ja", nil];//添加语言
     //@"th"
-    [self getToken];
     [self setUpUI];
     
 }
@@ -49,9 +47,8 @@
     }
     
     [self showLoadHud];
-    [self.client loginWithToken:self.authToken
-                       authTime:self.authTime
-                        success:^{
+    [self.client loginWithKey:@"qwerty"
+                      success:^{
 
         [self showHudMessage:@"登录成功" hideTime:1];
         NSLog(@"login success");

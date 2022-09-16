@@ -4,10 +4,6 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>.DS_Store</key>
-		<data>
-		ltrU1BFz2uVSuBtWnx+MmnHvlDI=
-		</data>
 		<key>Headers/FPNError.h</key>
 		<data>
 		QbT+7lWmN3invm1imS2ERSs5jPE=
@@ -70,7 +66,7 @@
 		</data>
 		<key>Headers/RTVTClient.h</key>
 		<data>
-		8fMSmy4Es5t2oTl12SwJb3YEdtM=
+		VztuUCA8S/N//sQkrRXqk1gDaNc=
 		</data>
 		<key>Headers/RTVTClientConfig.h</key>
 		<data>
@@ -272,11 +268,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8fMSmy4Es5t2oTl12SwJb3YEdtM=
+			VztuUCA8S/N//sQkrRXqk1gDaNc=
 			</data>
 			<key>hash2</key>
 			<data>
-			Wkww2p+VotbNq4fzJvmbUOIiT9UiR2Tpxg1f0FLXGao=
+			O0XGREQ0bC5DPXQex0+fGNCUANU/DiEIKxehd5fw6gk=
 			</data>
 		</dict>
 		<key>Headers/RTVTClientConfig.h</key>

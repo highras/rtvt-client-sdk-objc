@@ -29,7 +29,6 @@
 		561D3B2628A3611C00FEDE63 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 561D3B1B28A3611C00FEDE63 /* MBProgressHUD.m */; };
 		564FEDD528ADE09A00402D16 /* RTVT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 564FEDD428ADE09A00402D16 /* RTVT.framework */; };
 		56659EFA28AA1D7D006F635E /* ViewController+UI.m in Sources */ = {isa = PBXBuildFile; fileRef = 56659EF928AA1D7D006F635E /* ViewController+UI.m */; };
-		56659EFD28AA2088006F635E /* ViewController+Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 56659EFC28AA2088006F635E /* ViewController+Token.m */; };
 		56659F0528AA3F6E006F635E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56659F0428AA3F6E006F635E /* AVFoundation.framework */; };
 		56659F1A28AC90DC006F635E /* en.pcm in Resources */ = {isa = PBXBuildFile; fileRef = 56659F1628AC90DA006F635E /* en.pcm */; };
 		56659F1B28AC90DC006F635E /* th.pcm in Resources */ = {isa = PBXBuildFile; fileRef = 56659F1728AC90DB006F635E /* th.pcm */; };
@@ -104,8 +103,6 @@
 		564FEDD428ADE09A00402D16 /* RTVT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RTVT.framework; sourceTree = "<group>"; };
 		56659EF828AA1D7D006F635E /* ViewController+UI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ViewController+UI.h"; sourceTree = "<group>"; };
 		56659EF928AA1D7D006F635E /* ViewController+UI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ViewController+UI.m"; sourceTree = "<group>"; };
-		56659EFB28AA2088006F635E /* ViewController+Token.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ViewController+Token.h"; sourceTree = "<group>"; };
-		56659EFC28AA2088006F635E /* ViewController+Token.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ViewController+Token.m"; sourceTree = "<group>"; };
 		56659F0428AA3F6E006F635E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		56659F1628AC90DA006F635E /* en.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = en.pcm; sourceTree = "<group>"; };
 		56659F1728AC90DB006F635E /* th.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = th.pcm; sourceTree = "<group>"; };
@@ -187,8 +184,6 @@
 				561D3ACD28A0BE8900FEDE63 /* ViewController.mm */,
 				56659EF828AA1D7D006F635E /* ViewController+UI.h */,
 				56659EF928AA1D7D006F635E /* ViewController+UI.m */,
-				56659EFB28AA2088006F635E /* ViewController+Token.h */,
-				56659EFC28AA2088006F635E /* ViewController+Token.m */,
 				561D3AD228A0BE8B00FEDE63 /* Assets.xcassets */,
 				561D3AD428A0BE8B00FEDE63 /* LaunchScreen.storyboard */,
 				561D3AD728A0BE8B00FEDE63 /* Info.plist */,
@@ -404,7 +399,6 @@
 				561D3AD928A0BE8B00FEDE63 /* main.m in Sources */,
 				561D3B1E28A3611C00FEDE63 /* MASCompositeConstraint.m in Sources */,
 				561D3B2228A3611C00FEDE63 /* View+MASAdditions.m in Sources */,
-				56659EFD28AA2088006F635E /* ViewController+Token.m in Sources */,
 				561D3B1C28A3611C00FEDE63 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				561D3B2528A3611C00FEDE63 /* MASViewAttribute.m in Sources */,
 				561D3B2628A3611C00FEDE63 /* MBProgressHUD.m in Sources */,

@@ -36,10 +36,9 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
                                    delegate:(id <RTVTProtocol>)delegate;
 
 
-- (void)loginWithToken:(nonnull NSString *)token
-              authTime:(int64_t)authTime
-               success:(RTVTLoginSuccessCallBack)loginSuccess
-           connectFail:(RTVTLoginFailCallBack)loginFail;
+- (void)loginWithKey:(nonnull NSString *)key
+             success:(RTVTLoginSuccessCallBack)loginSuccess
+         connectFail:(RTVTLoginFailCallBack)loginFail;
 
 
 @property (nonatomic,readonly,strong)NSString * sdkVersion;
