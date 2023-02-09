@@ -27,7 +27,6 @@ RTVT 使用文档
 
 + (nullable instancetype)clientWithEndpoint:(nonnull NSString * )endpoint
                                   projectId:(int64_t)projectId
-                                     userId:(int64_t)userId
                                    delegate:(id <RTVTProtocol>)delegate;
 
 
