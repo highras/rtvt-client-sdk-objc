@@ -9,7 +9,7 @@
 #import "MBProgressHUD.h"
 #import "Masonry.h"
 #import <RTVT/RTVT.h>
-
+#import "VoiceCapture.h"
 #define YS_Color_alpha(value, a) [UIColor colorWithRed:((float)((value & 0xFF0000) >> 16))/255.0  \
                                              green:((float)((value & 0xFF00) >> 8))/255.0     \
                                               blue:((float)(value & 0xFF))/255.0              \
@@ -18,6 +18,7 @@
 @interface ViewController : UIViewController<RTVTProtocol,UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)RTVTClient * client;
+@property(nonatomic,strong)VoiceCapture * capture;
 @property(nonatomic,strong)dispatch_source_t sendTimer;
 @property(nonatomic,strong)NSMutableData * pcmData;
 @property(nonatomic,assign)int64_t streamId;
@@ -33,6 +34,7 @@
 @property(nonatomic,strong)UIButton * loginButton;
 @property(nonatomic,strong)UIButton * closeConnectButton;
 @property(nonatomic,strong)UIButton * streamIdButton;
+@property(nonatomic,strong)UIButton * streamIdButtonCapture;
 @property(nonatomic,strong)UIButton * closeSendButton;
 @property(nonatomic,strong)NSMutableArray * translatedResultArray;
 @property(nonatomic,strong)NSMutableArray * recognizedResultArray;

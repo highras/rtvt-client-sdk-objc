@@ -27,7 +27,6 @@
 		561D3B2428A3611C00FEDE63 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 561D3B1828A3611C00FEDE63 /* MASViewConstraint.m */; };
 		561D3B2528A3611C00FEDE63 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 561D3B1928A3611C00FEDE63 /* MASViewAttribute.m */; };
 		561D3B2628A3611C00FEDE63 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 561D3B1B28A3611C00FEDE63 /* MBProgressHUD.m */; };
-		564FEDD528ADE09A00402D16 /* RTVT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 564FEDD428ADE09A00402D16 /* RTVT.framework */; };
 		56659EFA28AA1D7D006F635E /* ViewController+UI.m in Sources */ = {isa = PBXBuildFile; fileRef = 56659EF928AA1D7D006F635E /* ViewController+UI.m */; };
 		56659F0528AA3F6E006F635E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56659F0428AA3F6E006F635E /* AVFoundation.framework */; };
 		56659F1A28AC90DC006F635E /* en.pcm in Resources */ = {isa = PBXBuildFile; fileRef = 56659F1628AC90DA006F635E /* en.pcm */; };
@@ -38,6 +37,9 @@
 		56659F2428AC9161006F635E /* th.wav in Resources */ = {isa = PBXBuildFile; fileRef = 56659F2128AC9160006F635E /* th.wav */; };
 		56659F2C28ADD96D006F635E /* zh.pcm in Resources */ = {isa = PBXBuildFile; fileRef = 56659F2A28ADD96D006F635E /* zh.pcm */; };
 		56659F2D28ADD96D006F635E /* zh.wav in Resources */ = {isa = PBXBuildFile; fileRef = 56659F2B28ADD96D006F635E /* zh.wav */; };
+		566E18A22994900B004CA9B9 /* GetToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 566E18A12994900B004CA9B9 /* GetToken.m */; };
+		566E18A529949074004CA9B9 /* VoiceCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 566E18A429949074004CA9B9 /* VoiceCapture.m */; };
+		566E18A72994909A004CA9B9 /* RTVT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 566E18A629949099004CA9B9 /* RTVT.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,7 +102,6 @@
 		561D3B1928A3611C00FEDE63 /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
 		561D3B1A28A3611C00FEDE63 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		561D3B1B28A3611C00FEDE63 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		564FEDD428ADE09A00402D16 /* RTVT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RTVT.framework; sourceTree = "<group>"; };
 		56659EF828AA1D7D006F635E /* ViewController+UI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ViewController+UI.h"; sourceTree = "<group>"; };
 		56659EF928AA1D7D006F635E /* ViewController+UI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ViewController+UI.m"; sourceTree = "<group>"; };
 		56659F0428AA3F6E006F635E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -112,6 +113,11 @@
 		56659F2128AC9160006F635E /* th.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = th.wav; sourceTree = "<group>"; };
 		56659F2A28ADD96D006F635E /* zh.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = zh.pcm; sourceTree = "<group>"; };
 		56659F2B28ADD96D006F635E /* zh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = zh.wav; sourceTree = "<group>"; };
+		566E18A02994900B004CA9B9 /* GetToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetToken.h; sourceTree = "<group>"; };
+		566E18A12994900B004CA9B9 /* GetToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetToken.m; sourceTree = "<group>"; };
+		566E18A329949074004CA9B9 /* VoiceCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceCapture.h; sourceTree = "<group>"; };
+		566E18A429949074004CA9B9 /* VoiceCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceCapture.m; sourceTree = "<group>"; };
+		566E18A629949099004CA9B9 /* RTVT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RTVT.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				561D3AFD28A0C06A00FEDE63 /* libresolv.9.tbd in Frameworks */,
-				564FEDD528ADE09A00402D16 /* RTVT.framework in Frameworks */,
+				566E18A72994909A004CA9B9 /* RTVT.framework in Frameworks */,
 				56659F0528AA3F6E006F635E /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,7 +151,7 @@
 		561D3ABA28A0BE8900FEDE63 = {
 			isa = PBXGroup;
 			children = (
-				564FEDD428ADE09A00402D16 /* RTVT.framework */,
+				566E18A629949099004CA9B9 /* RTVT.framework */,
 				561D3B0028A3611C00FEDE63 /* Masonry */,
 				561D3B1A28A3611C00FEDE63 /* MBProgressHUD.h */,
 				561D3B1B28A3611C00FEDE63 /* MBProgressHUD.m */,
@@ -178,10 +184,14 @@
 				56659F1E28AC9147006F635E /* ja.wav */,
 				56659F2028AC9160006F635E /* en.wav */,
 				56659F2128AC9160006F635E /* th.wav */,
+				566E18A02994900B004CA9B9 /* GetToken.h */,
+				566E18A12994900B004CA9B9 /* GetToken.m */,
 				561D3AC628A0BE8900FEDE63 /* AppDelegate.h */,
 				561D3AC728A0BE8900FEDE63 /* AppDelegate.m */,
 				561D3ACC28A0BE8900FEDE63 /* ViewController.h */,
 				561D3ACD28A0BE8900FEDE63 /* ViewController.mm */,
+				566E18A329949074004CA9B9 /* VoiceCapture.h */,
+				566E18A429949074004CA9B9 /* VoiceCapture.m */,
 				56659EF828AA1D7D006F635E /* ViewController+UI.h */,
 				56659EF928AA1D7D006F635E /* ViewController+UI.m */,
 				561D3AD228A0BE8B00FEDE63 /* Assets.xcassets */,
@@ -392,7 +402,9 @@
 				561D3ACE28A0BE8900FEDE63 /* ViewController.mm in Sources */,
 				561D3B1D28A3611C00FEDE63 /* ViewController+MASAdditions.m in Sources */,
 				561D3B2428A3611C00FEDE63 /* MASViewConstraint.m in Sources */,
+				566E18A529949074004CA9B9 /* VoiceCapture.m in Sources */,
 				561D3AC828A0BE8900FEDE63 /* AppDelegate.m in Sources */,
+				566E18A22994900B004CA9B9 /* GetToken.m in Sources */,
 				561D3B2028A3611C00FEDE63 /* MASLayoutConstraint.m in Sources */,
 				561D3B2328A3611C00FEDE63 /* MASConstraint.m in Sources */,
 				561D3B2128A3611C00FEDE63 /* NSArray+MASAdditions.m in Sources */,

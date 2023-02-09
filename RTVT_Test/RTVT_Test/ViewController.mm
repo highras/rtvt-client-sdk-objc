@@ -10,23 +10,45 @@
 #import "ViewController+UI.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
+#import <CoreTelephony/CTCellularData.h>
+#import "GetToken.h"
 @interface ViewController ()
 
 
 @property(nonatomic,strong) AVAudioPlayer * _Nullable audioPlayer;
 @property(nonatomic,strong) NSArray *  langArray;
-
+@property(nonatomic,assign)int stopVoiceNumber;
 
 @end
 
 @implementation ViewController
 
 
+
+
 - (void)viewDidLoad {
     
+    //id印尼语 th泰语 es西语 vi越南语 hi印地语 ar阿语 ms马来语
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.langArray = [NSArray arrayWithObjects:@"zh",@"en",@"ja", nil];//添加语言
+    
+   
+//    @"zh",
+//    @"en",
+//    @"ja",
+//    @"id",
+//    @"th",
+//    @"es",
+//    @"vi",
+//    @"hi",
+//    @"ar",
+//    @"ms",
+    self.langArray = [NSArray arrayWithObjects:
+                      @"zh",
+                      @"en",
+                      @"id",
+                      @"ar",
+                      nil];//添加语言
     //@"th"
     [self setUpUI];
     
@@ -47,7 +69,10 @@
     }
     
     [self showLoadHud];
-    [self.client loginWithKey:@"qwerty"
+    NSDictionary * tokenDic = [[GetToken new] getToken:@"qwerty" projectId:90008000];
+    NSLog(@"tokenDic  %@",tokenDic);
+    [self.client loginWithToken:[tokenDic valueForKey:@"token"]
+                             ts:[[tokenDic valueForKey:@"ts"] longLongValue]
                       success:^{
 
         [self showHudMessage:@"登录成功" hideTime:1];
@@ -65,6 +90,7 @@
     
     NSString * filePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@.pcm",self.srcLanguageButton.titleLabel.text] ofType:nil];
     self.pcmData = [NSMutableData dataWithContentsOfFile:filePath];
+    
     uint64_t interval = 0.02 * NSEC_PER_SEC;
     dispatch_queue_t pingTimerQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     if (self.sendTimer == nil) {
@@ -85,13 +111,17 @@
 }
 -(void)_destLanguageClick{
     
-    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"如果需要体验其他语种，请联系商务" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     for (int i = 0; i < self.langArray.count; i++) {
         
         if ([self.srcLanguageButton.titleLabel.text isEqualToString:[self.langArray objectAtIndex:i]] == NO) {
             UIAlertAction *languageType = [UIAlertAction actionWithTitle:[self.langArray objectAtIndex:i] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [self.destLanguageButton setTitle:[self.langArray objectAtIndex:i] forState:UIControlStateNormal];
+                
+                if ([self.destLanguageButton.titleLabel.text isEqualToString:@"ar"]) {
+                    
+                }
             }];
             [alertVc addAction:languageType];
         }
@@ -109,7 +139,7 @@
 }
 -(void)_srcLanguageClick{
     
-    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"如果需要体验其他语种，请联系商务" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     for (int i = 0; i < self.langArray.count; i++) {
         
         if ([self.destLanguageButton.titleLabel.text isEqualToString:[self.langArray objectAtIndex:i]] == NO) {
@@ -135,7 +165,7 @@
     @synchronized (self) {
         
         if (self.streamId != 0) {
-            
+//            NSLog(@"self.pcmData.length  %lu",(unsigned long)self.pcmData.length);
             //采样率 / 帧数 * short * 声道数
             int byteL = 16000 / 50 * sizeof(short) * 1;
             if (self.pcmData.length > byteL) {
@@ -173,7 +203,7 @@
     
 }
 
--(void)_streamIdClick{
+-(void)_getStreamId:(void(^)(void))successCall{
     
     if ([self.srcLanguageButton.titleLabel.text isEqualToString:@"请选择源语言"]) {
         [self showHudMessage:@"请选择源语言" hideTime:2];
@@ -194,28 +224,112 @@
             [self showHudMessage:[NSString stringWithFormat:@"获取streamId成功 id = %lld 开始测试",streamId] hideTime:2];
             
             @synchronized (self) {
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    
                     [self.recognizedResultArray removeAllObjects];
                     [self.translatedResultArray removeAllObjects];
                     [self.recognizedTableView reloadData];
                     [self.translatedTableView reloadData];
                     
                     self.streamId = streamId;
-                    [self _loadFileAndSend];
-                    [self.audioPlayer stop];
-                    [self _playVoice];
+                    if (successCall) {
+                        successCall();
+                    }
+                    
                 });
                 
             }
             
         } fail:^(FPNError * _Nullable error) {
             
+            NSLog(@"fail");
             [self showHudMessage:[NSString stringWithFormat:@"获取streamId fail %@",error.ex] hideTime:2];
             
         }];
         
     }
+}
+
+-(void)_streamIdClick{
     
+    [self _getStreamId:^{
+        
+        self.streamIdButtonCapture.userInteractionEnabled = NO;
+        self.streamIdButtonCapture.backgroundColor = [UIColor grayColor];
+        [self _loadFileAndSend];
+        [self.audioPlayer stop];
+        [self _playVoice];
+        
+    }];
+    
+}
+
+-(void)_streamIdClickCapture{
+    
+    [self _getStreamId:^{
+        
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        if (@available(iOS 10.0, *)) {
+            [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord
+                                         mode:AVAudioSessionModeVideoChat
+                              options:
+                    AVAudioSessionCategoryOptionDefaultToSpeaker|//默认输出扬声器
+                      AVAudioSessionCategoryOptionAllowBluetooth|//允许蓝牙输入
+                      AVAudioSessionCategoryOptionDuckOthers|
+                      AVAudioSessionCategoryOptionMixWithOthers|
+                      AVAudioSessionCategoryOptionAllowBluetoothA2DP|
+                      AVAudioSessionCategoryOptionAllowAirPlay
+                                error:nil];
+        }
+
+        [[AVAudioSession sharedInstance] setActive:YES withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
+        
+        self.streamIdButton.userInteractionEnabled = NO;
+        self.streamIdButton.backgroundColor = [UIColor grayColor];
+        [self _startCapture];
+        
+    }];
+    
+}
+-(void)_startCapture{
+    
+    if(self.capture == nil){
+        
+        self.capture = [VoiceCapture new];
+        __weak typeof(self) weakself = self;
+        self.capture.pcmCall = ^(NSData * _Nonnull pcmData) {
+            
+            short * pcmDataArray = (short*)pcmData.bytes;
+            int64_t vadH = 0;
+            for (int i = 0 ; i < RTVFrameNumber_16000 * 1; i++) {
+                short pcmH = pcmDataArray[i];
+                vadH = vadH + pcmH * pcmH;
+            }
+            if (vadH < 20000000) {//vad
+                weakself.stopVoiceNumber = weakself.stopVoiceNumber + 1;
+            }else{
+                weakself.stopVoiceNumber = 0;
+            }
+            
+//            if (weakself.stopVoiceNumber > 50) {
+//                return;
+//            }
+            weakself.seq = weakself.seq + 1;
+            [weakself.client sendVoiceWithStreamId:weakself.streamId
+                                     voiceData:pcmData
+                                           seq:weakself.seq
+                                            ts:0
+                                       success:^{
+               
+            } fail:^(FPNError * _Nullable error) {
+               
+            }];
+            
+        };
+    }
+    
+    [self.capture startCapture];
 }
 -(void)_playVoice{
     
@@ -237,12 +351,12 @@
             
         [self showHudMessage:[NSString stringWithFormat:@"结束发送 success = %lld",self.streamId] hideTime:1];
             
-            [self _endTimer];
+            [self _closeAll];
             
             
         } fail:^(FPNError * _Nullable error) {
             
-            [self showHudMessage:[NSString stringWithFormat:@"结束发送 fail = %@",error.ex] hideTime:2];
+            [self _closeAll];
             
         }];
         
@@ -253,7 +367,18 @@
     }
     
 }
-
+-(void)_closeAll{
+    
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self _endTimer];
+        [self.capture endCapture];
+        self.streamIdButton.backgroundColor = YS_Color_alpha(0x1b9fff,1);
+        self.streamIdButtonCapture.backgroundColor = YS_Color_alpha(0x1b9fff,1);
+        self.streamIdButton.userInteractionEnabled = YES;
+        self.streamIdButtonCapture.userInteractionEnabled = YES;
+    });
+}
 
 
 
@@ -378,13 +503,24 @@
 -(UIButton*)streamIdButton{
     if (_streamIdButton == nil) {
         _streamIdButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _streamIdButton.titleLabel.font = [UIFont systemFontOfSize:13];
-        [_streamIdButton setTitle:@"申请streamId,并开始发送数据进行测试" forState:UIControlStateNormal];
+        _streamIdButton.titleLabel.font = [UIFont systemFontOfSize:11];
+        [_streamIdButton setTitle:@"开始测试(读取文件方式)" forState:UIControlStateNormal];
         [_streamIdButton addTarget:self action:@selector(_streamIdClick) forControlEvents:UIControlEventTouchUpInside];
         _streamIdButton.backgroundColor = YS_Color_alpha(0x1b9fff,1);
         [_streamIdButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     return _streamIdButton;
+}
+-(UIButton*)streamIdButtonCapture{
+    if (_streamIdButtonCapture == nil) {
+        _streamIdButtonCapture = [UIButton buttonWithType:UIButtonTypeCustom];
+        _streamIdButtonCapture.titleLabel.font = [UIFont systemFontOfSize:11];
+        [_streamIdButtonCapture setTitle:@"开始测试(自采集方式)" forState:UIControlStateNormal];
+        [_streamIdButtonCapture addTarget:self action:@selector(_streamIdClickCapture) forControlEvents:UIControlEventTouchUpInside];
+        _streamIdButtonCapture.backgroundColor = YS_Color_alpha(0x1b9fff,1);
+        [_streamIdButtonCapture setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+    return _streamIdButtonCapture;
 }
 -(UIButton*)closeSendButton{
     if (_closeSendButton == nil) {

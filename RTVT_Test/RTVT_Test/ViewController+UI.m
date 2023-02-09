@@ -68,8 +68,14 @@
         make.top.equalTo(self.srcLanguageButton.mas_bottom).offset(30);
         make.left.equalTo(self.srcLanguageTitle);
     }];
-
     
+    
+    [self.bgScrollView addSubview:self.streamIdButtonCapture];
+    [self.streamIdButtonCapture mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.streamIdButton);
+        make.right.equalTo(self.destLanguageButton.mas_right);
+    }];
+
     
     self.translatedResultArray = [NSMutableArray array];
     self.recognizedResultArray = [NSMutableArray array];
@@ -114,6 +120,7 @@
     
     if (tableView == self.translatedTableView) {
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellId"];
+        
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellId"];
             cell.backgroundColor = [UIColor blackColor];
@@ -121,7 +128,11 @@
             cell.textLabel.font = [UIFont systemFontOfSize:12];
             cell.textLabel.numberOfLines = 0;
         }
-        
+        if([self.destLanguageButton.titleLabel.text isEqualToString:@"ar"]){
+            cell.textLabel.textAlignment = NSTextAlignmentRight;
+        }else{
+            cell.textLabel.textAlignment = NSTextAlignmentLeft;
+        }
         cell.textLabel.text = [self.translatedResultArray objectAtIndex:indexPath.row];
         
         return cell;
@@ -129,6 +140,7 @@
     }else{
         
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellId"];
+        
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellId"];
             cell.backgroundColor = [UIColor blackColor];
@@ -136,7 +148,11 @@
             cell.textLabel.font = [UIFont systemFontOfSize:12];
             cell.textLabel.numberOfLines = 0;
         }
-        
+        if([self.srcLanguageButton.titleLabel.text isEqualToString:@"ar"]){
+            cell.textLabel.textAlignment = NSTextAlignmentRight;
+        }else{
+            cell.textLabel.textAlignment = NSTextAlignmentLeft;
+        }
         cell.textLabel.text = [self.recognizedResultArray objectAtIndex:indexPath.row];
         
         return cell;
