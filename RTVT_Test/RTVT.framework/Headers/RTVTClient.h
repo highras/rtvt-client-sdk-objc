@@ -32,7 +32,6 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
 
 + (nullable instancetype)clientWithEndpoint:(nonnull NSString * )endpoint
                                   projectId:(int64_t)projectId
-                                     userId:(int64_t)userId
                                    delegate:(id <RTVTProtocol>)delegate;
 
 

@@ -10,7 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GetToken : NSObject
--(NSDictionary * )getToken:(NSString*)key projectId:(int64_t)projectId;
++(NSDictionary*)getToken:(NSString*)key pid:(NSString*)pid;
+
 @end
 
 NS_ASSUME_NONNULL_END

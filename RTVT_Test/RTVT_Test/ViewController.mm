@@ -27,6 +27,7 @@
 
 
 - (void)viewDidLoad {
+
     
     //id印尼语 th泰语 es西语 vi越南语 hi印地语 ar阿语 ms马来语
     [super viewDidLoad];
@@ -62,14 +63,13 @@
 
         self.client = [RTVTClient clientWithEndpoint:@"rtvt.ilivedata.com:14001"
                                            projectId:90008000
-                                              userId:666
                                             delegate:self];
         
 
     }
     
     [self showLoadHud];
-    NSDictionary * tokenDic = [[GetToken new] getToken:@"qwerty" projectId:90008000];
+    NSDictionary * tokenDic = [GetToken getToken:@"cXdlcnR5" pid:[NSString stringWithFormat:@"%d",90008000]];
     NSLog(@"tokenDic  %@",tokenDic);
     [self.client loginWithToken:[tokenDic valueForKey:@"token"]
                              ts:[[tokenDic valueForKey:@"ts"] longLongValue]

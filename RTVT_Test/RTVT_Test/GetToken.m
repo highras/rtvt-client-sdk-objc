@@ -1,15 +1,18 @@
 //
-//  GetToken.m
-//  RTVT_Test
+//  GeyTokenTest.m
+//  SdkTest
 //
-//  Created by 张世良 on 2023/2/9.
+//  Created by zsl on 2022/11/23.
+//  Copyright © 2022 FunPlus. All rights reserved.
 //
 
 #import "GetToken.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonHMAC.h>
+
 @implementation GetToken
-- (NSString *)md5:(NSString*)string {
+
++ (NSString *)md5:(NSString*)string {
     
     if(string == nil || [string length] == 0){
         return nil;
@@ -26,34 +29,34 @@
     
     return outputString;
 }
-- (NSString *)hmacSHA256WithSecret:(NSString *)secret content:(NSString *)content{
++ (NSData *)hmacSHA256WithSecret:(NSString *)secret content:(NSString *)content{
     
     const char *cKey  = [secret cStringUsingEncoding:NSASCIIStringEncoding];
     const char *cData = [content cStringUsingEncoding:NSUTF8StringEncoding];
     unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
     CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
-    NSMutableString *hexString = [NSMutableString string];
-    for (int i=0; i<sizeof(cHMAC); i++){
-        [hexString appendFormat:@"%02x", cHMAC[i]];
-    }
-    return hexString;
+    
+    NSData *HMAC = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
+//    NSLog(@"HMAC  %@",HMAC);
+//    NSMutableString *hexString = [NSMutableString string];
+//    for (int i=0; i<sizeof(cHMAC); i++){
+//        [hexString appendFormat:@"%02x", cHMAC[i]];
+//    }
+    return HMAC;
+}
++ (NSString *)base64DecodingString:(NSString*)key {
+    NSData *data = [[NSData alloc] initWithBase64EncodedString:key options:0];
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+}
++(NSDictionary*)getToken:(NSString*)key pid:(NSString*)pid{
+    
+    NSString * secert = [GetToken base64DecodingString:key];
+    NSString * time = [NSString stringWithFormat:@"%@",[NSNumber numberWithLongLong:[[NSDate date] timeIntervalSince1970]]];
+    NSString * source_step1 = [NSString stringWithFormat:@"%@:%@",pid,time];
+    NSData * h256Data_step2 = [GetToken hmacSHA256WithSecret:secert content:source_step1];
+    NSString * base64Result = [h256Data_step2 base64EncodedStringWithOptions:0];
+    return @{@"ts":time,@"token":base64Result};
+    
 }
 
--(NSDictionary * )getToken:(NSString*)key projectId:(int64_t)projectId{
-    
-    NSString * time = [NSString stringWithFormat:@"%@",[NSNumber numberWithLongLong:[[NSDate date] timeIntervalSince1970]]];
-//    NSString * coreString = [NSString stringWithFormat:@"%d:%@",9008000,time];
-    NSString * coreString = [NSString stringWithFormat:@"%lld:%@",projectId,time];
-    NSString * md5String = [self md5:coreString].lowercaseString;
-    NSString * h256String = [self hmacSHA256WithSecret:key content:md5String];
-    //qwerty
-//    NSData *data = [h256String dataUsingEncoding:NSUTF8StringEncoding];
-//    NSString *base64String = [data base64EncodedStringWithOptions:0];
-    
-    
-    return @{@"ts":time,@"token":h256String};
-//
-//    NSLog(@"authToken = %@  authTime = %lld",self.token,self.authTime);
-    
-}
 @end
