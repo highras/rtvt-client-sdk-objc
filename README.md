@@ -31,9 +31,10 @@ RTVT 使用文档
                                    delegate:(id <RTVTProtocol>)delegate;
 
 
-- (void)loginWithKey:(nonnull NSString *)key
-             success:(RTVTLoginSuccessCallBack)loginSuccess
-         connectFail:(RTVTLoginFailCallBack)loginFail;
+- (void)loginWithToken:(nonnull NSString *)token
+                    ts:(int64_t)ts//生成token对应的时间
+               success:(RTVTLoginSuccessCallBack)loginSuccess
+           connectFail:(RTVTLoginFailCallBack)loginFail;
 ```
 
 <a id="代理方法">代理方法</a>
