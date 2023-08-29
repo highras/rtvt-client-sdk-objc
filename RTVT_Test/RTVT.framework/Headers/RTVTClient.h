@@ -46,7 +46,7 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
 @property (nonatomic,readonly,assign)RTVTClientConnectStatus currentConnectStatus;
 @property (nonatomic,assign,nullable)id <RTVTProtocol> delegate;
 @property (nonatomic,readonly,assign)int64_t projectId;
-@property (nonatomic,readonly,assign)int64_t userId;
+
 
 
 
