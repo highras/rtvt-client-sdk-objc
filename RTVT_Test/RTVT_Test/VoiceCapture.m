@@ -153,6 +153,7 @@ static OSStatus recordingCallback(void *inRefCon,
             NSData *pcmBlock = [NSData dataWithBytes:sourceBuffer.mData length:sourceBuffer.mDataByteSize];
             
             if (pcmBlock) {
+                
                 [self.recoderData appendData:pcmBlock];
                 if (self.pcmCall != nil && self.recoderData.length >= RTVFrameNumber_16000 * sizeof(short) * 1) {
                     
@@ -164,6 +165,15 @@ static OSStatus recordingCallback(void *inRefCon,
                     
                 }
                 
+                if (self.pcmCall != nil && self.recoderData.length >= RTVFrameNumber_16000 * sizeof(short) * 1) {
+                    
+                    NSData * perFramePcmData = [self.recoderData subdataWithRange:NSMakeRange(0, RTVFrameNumber_16000 * sizeof(short) * 1)];
+                    [self.recoderData replaceBytesInRange:NSMakeRange(0, RTVFrameNumber_16000 * sizeof(short) * 1) withBytes:NULL length:0];
+                    
+//                    NSLog(@"%lu",(unsigned long)perFramePcmData.length);
+                    self.pcmCall(perFramePcmData);
+                    
+                }
             }
   
         }

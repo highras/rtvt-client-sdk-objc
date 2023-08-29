@@ -44,13 +44,7 @@
 //    @"hi",
 //    @"ar",
 //    @"ms",
-    self.langArray = [NSArray arrayWithObjects:
-                      @"zh",
-                      @"en",
-                      @"id",
-                      @"ar",
-                      nil];//添加语言
-    //@"th"
+
     [self setUpUI];
     
 }
@@ -59,30 +53,40 @@
 #pragma mark click event
 -(void)_loginClick{
  
-    if (self.client == nil) {
-
-        self.client = [RTVTClient clientWithEndpoint:@"rtvt.ilivedata.com:14001"
-                                           projectId:90008000
-                                            delegate:self];
+    [self _getLanguage:^(NSArray * array) {
         
+        self.langArray = array;
+        
+        NSLog(@"当前可支持语言 %@",self.langArray);
+        
+        if (self.client == nil) {
 
-    }
+            self.client = [RTVTClient clientWithEndpoint:@"rtvt.ilivedata.com:14001"
+                                               projectId:90008000
+                                                delegate:self];
+            
+
+        }
+        
+        [self showLoadHud];
+        NSDictionary * tokenDic = [GetToken getToken:@"cXdlcnR5" pid:[NSString stringWithFormat:@"%d",90008000]];
+        NSLog(@"tokenDic  %@",tokenDic);
+        [self.client loginWithToken:[tokenDic valueForKey:@"token"]
+                                 ts:[[tokenDic valueForKey:@"ts"] longLongValue]
+                          success:^{
+
+            [self showHudMessage:@"登录成功" hideTime:1];
+            NSLog(@"login success");
+
+        } connectFail:^(FPNError * _Nullable error) {
+
+            [self showHudMessage:[NSString stringWithFormat:@"登录失败%@",error.ex] hideTime:2];
+            NSLog(@"login fail %@",error);
+
+        }];
     
-    [self showLoadHud];
-    NSDictionary * tokenDic = [GetToken getToken:@"cXdlcnR5" pid:[NSString stringWithFormat:@"%d",90008000]];
-    NSLog(@"tokenDic  %@",tokenDic);
-    [self.client loginWithToken:[tokenDic valueForKey:@"token"]
-                             ts:[[tokenDic valueForKey:@"ts"] longLongValue]
-                      success:^{
-
-        [self showHudMessage:@"登录成功" hideTime:1];
-        NSLog(@"login success");
-
-    } connectFail:^(FPNError * _Nullable error) {
-
-        [self showHudMessage:[NSString stringWithFormat:@"登录失败%@",error.ex] hideTime:2];
-        NSLog(@"login fail %@",error);
-
+    
+        
     }];
     
 }
@@ -91,7 +95,7 @@
     NSString * filePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@.pcm",self.srcLanguageButton.titleLabel.text] ofType:nil];
     self.pcmData = [NSMutableData dataWithContentsOfFile:filePath];
     
-    uint64_t interval = 0.02 * NSEC_PER_SEC;
+    uint64_t interval = 0.018 * NSEC_PER_SEC;
     dispatch_queue_t pingTimerQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     if (self.sendTimer == nil) {
         self.sendTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, pingTimerQueue);
@@ -106,7 +110,7 @@
 -(void)_closeConnectClick{
     
     [self.client closeConnect];
-    [self _endTimer];
+    [self _closeAll];
     
 }
 -(void)_destLanguageClick{
@@ -306,15 +310,16 @@
                 short pcmH = pcmDataArray[i];
                 vadH = vadH + pcmH * pcmH;
             }
-            if (vadH < 20000000) {//vad
-                weakself.stopVoiceNumber = weakself.stopVoiceNumber + 1;
-            }else{
-                weakself.stopVoiceNumber = 0;
-            }
+//            if (vadH < 20000000) {//vad
+//                weakself.stopVoiceNumber = weakself.stopVoiceNumber + 1;
+//            }else{
+//                weakself.stopVoiceNumber = 0;
+//            }
             
 //            if (weakself.stopVoiceNumber > 50) {
 //                return;
 //            }
+            
             weakself.seq = weakself.seq + 1;
             [weakself.client sendVoiceWithStreamId:weakself.streamId
                                      voiceData:pcmData
@@ -637,6 +642,25 @@
         _bgScrollView.backgroundColor = [UIColor whiteColor];
     }
     return _bgScrollView;
+}
+
+-(void)_getLanguage:(void (^)(NSArray * array))call{
+   
+    
+    NSURL *url =[NSURL URLWithString:[@"http://rtvt.ilivedata.com:14001/service/getAvailableLanguage" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSURLSession *session =[NSURLSession sharedSession];
+    __weak typeof(self) weakSelf = self;
+    NSURLSessionDataTask *dataTask =[session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if (error == nil) {
+            NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            call([dic objectForKey:@"srcLanguage"]);
+        }else{
+            [self showHudMessage:[NSString stringWithFormat:@"%@",error.userInfo] hideTime:2];
+        }
+    }];
+    [dataTask resume];
+    
 }
 @end
 
