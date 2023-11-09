@@ -15,20 +15,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @required
 -(void)translatedResultWithStreamId:(int64_t)streamId
-                            startTs:(int)startTs
-                              endTs:(int)endTs
+                            startTs:(int64_t)startTs
+                              endTs:(int64_t)endTs
                              result:(NSString * _Nullable)result
-                              recTs:(int)recTs;
+                              recTs:(int64_t)recTs;
 
 
 
 
 @optional
 -(void)recognizedResultWithStreamId:(int64_t)streamId
-                            startTs:(int)startTs
-                              endTs:(int)endTs
+                            startTs:(int64_t)startTs
+                              endTs:(int64_t)endTs
                              result:(NSString * _Nullable)result
-                              recTs:(int)recTs;
+                              recTs:(int64_t)recTs;
 
 //重连只有在登录成功过1次后才会有效
 //重连将要开始  根据返回值是否进行重连

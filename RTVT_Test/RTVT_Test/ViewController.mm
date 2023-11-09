@@ -62,14 +62,14 @@
         if (self.client == nil) {
 
             self.client = [RTVTClient clientWithEndpoint:@"rtvt.ilivedata.com:14001"
-                                               projectId:90008000
+                                               projectId:81700051
                                                 delegate:self];
             
 
         }
         
         [self showLoadHud];
-        NSDictionary * tokenDic = [GetToken getToken:@"cXdlcnR5" pid:[NSString stringWithFormat:@"%d",90008000]];
+        NSDictionary * tokenDic = [GetToken getToken:@"MDlmMzBkNDItYThlMS00ZWVjLTgxZDMtOWZhMzg3YWNiNDQz" pid:[NSString stringWithFormat:@"%d",81700051]];
         NSLog(@"tokenDic  %@",tokenDic);
         [self.client loginWithToken:[tokenDic valueForKey:@"token"]
                                  ts:[[tokenDic valueForKey:@"ts"] longLongValue]
@@ -179,11 +179,11 @@
                 [self.pcmData replaceBytesInRange:NSMakeRange(0, byteL) withBytes:NULL length:0];
 //                NSLog(@"%lu  %lu",(unsigned long)perFramePcmData.length,(unsigned long)self.pcmData.length);
                 self.seq = self.seq + 1;
-                
+                int64_t ts = [[NSDate date] timeIntervalSince1970] * 1000;
                 [self.client sendVoiceWithStreamId:self.streamId
                                          voiceData:perFramePcmData
                                                seq:self.seq
-                                                ts:0
+                                                ts:ts
                                            success:^{
                     
                 } fail:^(FPNError * _Nullable error) {
@@ -223,6 +223,7 @@
         [self.client starStreamTranslateWithAsrResult:YES
                                           srcLanguage:self.srcLanguageButton.titleLabel.text
                                          destLanguage:self.destLanguageButton.titleLabel.text
+                                       srcAltLanguage:@[]
                                               success:^(int64_t streamId) {
             
             [self showHudMessage:[NSString stringWithFormat:@"获取streamId成功 id = %lld 开始测试",streamId] hideTime:2];
@@ -247,7 +248,6 @@
             
         } fail:^(FPNError * _Nullable error) {
             
-            NSLog(@"fail");
             [self showHudMessage:[NSString stringWithFormat:@"获取streamId fail %@",error.ex] hideTime:2];
             
         }];
@@ -397,12 +397,12 @@
 //@required
 //语音翻译
 -(void)translatedResultWithStreamId:(int64_t)streamId
-                            startTs:(int)startTs
-                              endTs:(int)endTs
+                            startTs:(int64_t)startTs
+                              endTs:(int64_t)endTs
                              result:(NSString * _Nullable)result
-                              recTs:(int)recTs{
+                              recTs:(int64_t)recTs{
     
-//    NSLog(@"翻译结果 = %@   streamId = %d",result,streamId);
+//    NSLog(@"翻译结果 = %@   streamId = %lld %lld",result,streamId,startTs);
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.translatedResultArray addObject:result];
         [self.translatedTableView reloadData];
@@ -416,12 +416,12 @@
 //@optional
 //语音识别
 -(void)recognizedResultWithStreamId:(int64_t)streamId
-                            startTs:(int)startTs
-                              endTs:(int)endTs
+                            startTs:(int64_t)startTs
+                              endTs:(int64_t)endTs
                              result:(NSString * _Nullable)result
-                              recTs:(int)recTs{
+                              recTs:(int64_t)recTs{
     
-//    NSLog(@"识别结果 = %@   streamId = %d",result,streamId);
+//    NSLog(@"识别结果 = %@   streamId = %lld %lld",result,streamId,startTs);
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.recognizedResultArray addObject:result];
         [self.recognizedTableView reloadData];

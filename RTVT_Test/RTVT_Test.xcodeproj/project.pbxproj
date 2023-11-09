@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		560E62C12AFC73200046F440 /* pt.pcm in Resources */ = {isa = PBXBuildFile; fileRef = 560E62BF2AFC73200046F440 /* pt.pcm */; };
+		560E62C22AFC73200046F440 /* pt.wav in Resources */ = {isa = PBXBuildFile; fileRef = 560E62C02AFC73200046F440 /* pt.wav */; };
 		561D3AC828A0BE8900FEDE63 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 561D3AC728A0BE8900FEDE63 /* AppDelegate.m */; };
 		561D3ACE28A0BE8900FEDE63 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 561D3ACD28A0BE8900FEDE63 /* ViewController.mm */; };
 		561D3AD328A0BE8B00FEDE63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 561D3AD228A0BE8B00FEDE63 /* Assets.xcassets */; };
@@ -72,6 +74,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		560E62BF2AFC73200046F440 /* pt.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = pt.pcm; sourceTree = "<group>"; };
+		560E62C02AFC73200046F440 /* pt.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pt.wav; sourceTree = "<group>"; };
 		561D3AC328A0BE8900FEDE63 /* RTVT_Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RTVT_Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		561D3AC628A0BE8900FEDE63 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		561D3AC728A0BE8900FEDE63 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -210,6 +214,8 @@
 				56218BD729D6DF9400A7793E /* hi.pcm */,
 				56218BD629D6DF9400A7793E /* ms.pcm */,
 				56218BD529D6DF9400A7793E /* vi.pcm */,
+				560E62BF2AFC73200046F440 /* pt.pcm */,
+				560E62C02AFC73200046F440 /* pt.wav */,
 				56C292ED29D696220008254C /* id.wav */,
 				56638B2329DA8BEF00452929 /* ar.wav */,
 				56659F2B28ADD96D006F635E /* zh.wav */,
@@ -412,6 +418,7 @@
 				56218BDB29D6DF9500A7793E /* ms.pcm in Resources */,
 				561D3AD328A0BE8B00FEDE63 /* Assets.xcassets in Resources */,
 				56638B2529DA8BEF00452929 /* ar.wav in Resources */,
+				560E62C12AFC73200046F440 /* pt.pcm in Resources */,
 				56659F1B28AC90DC006F635E /* th.pcm in Resources */,
 				56659F2328AC9161006F635E /* en.wav in Resources */,
 				56638B2629DA8BEF00452929 /* ar.pcm in Resources */,
@@ -420,6 +427,7 @@
 				56659F1F28AC9147006F635E /* ja.wav in Resources */,
 				56659F1A28AC90DC006F635E /* en.pcm in Resources */,
 				56659F2428AC9161006F635E /* th.wav in Resources */,
+				560E62C22AFC73200046F440 /* pt.wav in Resources */,
 				56659F2C28ADD96D006F635E /* zh.pcm in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -639,7 +647,6 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -650,8 +657,11 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ys.rtvt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -675,7 +685,6 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -686,8 +695,11 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ys.rtvt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
