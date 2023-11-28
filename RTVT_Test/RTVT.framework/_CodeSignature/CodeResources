@@ -66,7 +66,7 @@
 		</data>
 		<key>Headers/RTVTClient.h</key>
 		<data>
-		cur6jxR1B2SPY41M3TO6gp6y4VE=
+		G71O1B3hUA0vVnjJLhbv7hm2sKY=
 		</data>
 		<key>Headers/RTVTClientConfig.h</key>
 		<data>
@@ -82,7 +82,7 @@
 		</data>
 		<key>Headers/RTVTProtocol.h</key>
 		<data>
-		Y+GdkxGOMN2aXC/yYIXrJ3rEnEk=
+		yXKHFQreW43BH/p8zQ3XFU/VNqE=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -268,11 +268,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			cur6jxR1B2SPY41M3TO6gp6y4VE=
+			G71O1B3hUA0vVnjJLhbv7hm2sKY=
 			</data>
 			<key>hash2</key>
 			<data>
-			pgbeZOqvNXGu1XCsmjkVFbmCg+PZaNBDiVy/jprsqfM=
+			cLcSJ9TGNDPYv7WjtaJjIOExem61oUSoTPEVpwwu6qw=
 			</data>
 		</dict>
 		<key>Headers/RTVTClientConfig.h</key>
@@ -312,11 +312,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Y+GdkxGOMN2aXC/yYIXrJ3rEnEk=
+			yXKHFQreW43BH/p8zQ3XFU/VNqE=
 			</data>
 			<key>hash2</key>
 			<data>
-			DH1V7uKYurgpcEEfHLEuDWKZYdssn5CsULVpPcRwcVU=
+			ZNtPxcG4DOa81WklG0H0dZKZFXzWSLzLyqFsY2/lXqU=
 			</data>
 		</dict>
 		<key>LICENSE.txt</key>

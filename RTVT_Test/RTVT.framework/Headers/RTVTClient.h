@@ -52,13 +52,17 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
 
 
 /// 开始翻译 获取streamId
-/// @param asrResult 是否需要语音识别的结果。 如果asrResult设置为NO 那么只会推送翻译语言的文本 如果asrResult设置为YES 那么会推送源语言和翻译语言两个结果翻
+/// @param asrResult 是否需要语音识别的结果
+/// @param transResult 是否需要语音翻译的结果
+/// @param asrTempResult 是否需要临时语音识别的结果
 /// @param srcLanguage 源语言
 /// @param destLanguage 目标语言
 /// @param srcAltLanguage 备选语言
 /// @param successCallback 成功回调
 /// @param failCallback 失败回调
 -(void)starStreamTranslateWithAsrResult:(BOOL)asrResult
+                            transResult:(BOOL)transResult
+                          asrTempResult:(BOOL)asrTempResult
                             srcLanguage:(nonnull NSString *)srcLanguage
                            destLanguage:(nonnull NSString *)destLanguage
                          srcAltLanguage:(nonnull NSArray <NSString*> *) srcAltLanguage

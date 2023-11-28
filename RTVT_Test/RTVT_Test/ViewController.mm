@@ -221,6 +221,8 @@
         
         [self showLoadHud];
         [self.client starStreamTranslateWithAsrResult:YES
+                                          transResult:YES
+                                        asrTempResult:YES
                                           srcLanguage:self.srcLanguageButton.titleLabel.text
                                          destLanguage:self.destLanguageButton.titleLabel.text
                                        srcAltLanguage:@[]
@@ -394,7 +396,6 @@
 
 
 #pragma mark rtvt delegate
-//@required
 //语音翻译
 -(void)translatedResultWithStreamId:(int64_t)streamId
                             startTs:(int64_t)startTs
@@ -413,7 +414,6 @@
 }
 
 
-//@optional
 //语音识别
 -(void)recognizedResultWithStreamId:(int64_t)streamId
                             startTs:(int64_t)startTs
@@ -431,6 +431,16 @@
     
 }
 
+//识别中间结果
+-(void)recognizedTmpResultWithStreamId:(int64_t)streamId
+                               startTs:(int64_t)startTs
+                                 endTs:(int64_t)endTs
+                                result:(NSString * _Nullable)result
+                                 recTs:(int64_t)recTs{
+    
+    
+    
+}
 //重连将要开始  根据返回值是否进行重连
 -(BOOL)rtvtReloginWillStart:(RTVTClient *)client reloginCount:(int)reloginCount{
     
