@@ -45,24 +45,17 @@ RTVT 使用文档
 @protocol RTVTProtocol 
 
 
--(void)translatedResultWithStreamId:(int)streamId
-                            startTs:(int)startTs
-                              endTs:(int)endTs
+-(void)translatedResultWithStreamId:(int64_t)streamId
+                            startTs:(int64_t)startTs
+                              endTs:(int64_t)endTs
                              result:(NSString * _Nullable)result
-                              recTs:(int)recTs;
+                              recTs:(int64_t)recTs;
 
-
-
-
-
--(void)recognizedResultWithStreamId:(int)streamId
-                            startTs:(int)startTs
-                              endTs:(int)endTs
+-(void)recognizedResultWithStreamId:(int64_t)streamId
+                            startTs:(int64_t)startTs
+                              endTs:(int64_t)endTs
                              result:(NSString * _Nullable)result
-                              recTs:(int)recTs;
-
-
-
+                              recTs:(int64_t)recTs;
 
 -(void)recognizedTmpResultWithStreamId:(int64_t)streamId
                                startTs:(int64_t)startTs
