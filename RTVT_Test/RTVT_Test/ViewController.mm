@@ -19,6 +19,9 @@
 @property(nonatomic,strong) NSArray *  langArray;
 @property(nonatomic,assign)int stopVoiceNumber;
 
+@property(nonatomic,strong)NSString * secretKey;
+@property(nonatomic,assign)int64_t projectId;
+
 @end
 
 @implementation ViewController
@@ -45,7 +48,18 @@
 //    @"ar",
 //    @"ms",
 
-    [self setUpUI];
+    
+    
+    // =================================================================
+    self.secretKey = @"";
+    self.projectId = 0;
+    // =================================================================
+    
+    
+    if (self.projectId !=0 && [self.secretKey isEqualToString:@""] == NO) {
+        [self setUpUI];
+    }
+    
     
 }
 
@@ -62,14 +76,14 @@
         if (self.client == nil) {
 
             self.client = [RTVTClient clientWithEndpoint:@"rtvt.ilivedata.com:14001"
-                                               projectId:81700051
+                                               projectId:self.projectId
                                                 delegate:self];
             
 
         }
         
         [self showLoadHud];
-        NSDictionary * tokenDic = [GetToken getToken:@"MDlmMzBkNDItYThlMS00ZWVjLTgxZDMtOWZhMzg3YWNiNDQz" pid:[NSString stringWithFormat:@"%d",81700051]];
+        NSDictionary * tokenDic = [GetToken getToken:self.secretKey pid:[NSString stringWithFormat:@"%d",self.projectId]];
         NSLog(@"tokenDic  %@",tokenDic);
         [self.client loginWithToken:[tokenDic valueForKey:@"token"]
                                  ts:[[tokenDic valueForKey:@"ts"] longLongValue]
