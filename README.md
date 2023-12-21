@@ -86,6 +86,7 @@ RTVT 使用文档
 /// @param asrResult 是否需要语音识别的结果
 /// @param transResult 是否需要语音翻译的结果
 /// @param asrTempResult 是否需要临时语音识别的结果
+/// @param userId 用户标识
 /// @param srcLanguage 源语言
 /// @param destLanguage 目标语言
 /// @param srcAltLanguage 备选语言
@@ -94,9 +95,10 @@ RTVT 使用文档
 -(void)starStreamTranslateWithAsrResult:(BOOL)asrResult
                             transResult:(BOOL)transResult
                           asrTempResult:(BOOL)asrTempResult
+                                 userId:(NSString * _Nullable)userId
                             srcLanguage:(nonnull NSString *)srcLanguage
                            destLanguage:(nonnull NSString *)destLanguage
-                         srcAltLanguage:(nonnull NSArray <NSString*> *) srcAltLanguage
+                         srcAltLanguage:(NSArray <NSString*> * _Nullable) srcAltLanguage
                                 success:(void(^)(int64_t streamId))successCallback
                                    fail:(RTVTAnswerFailCallBack)failCallback;
 
