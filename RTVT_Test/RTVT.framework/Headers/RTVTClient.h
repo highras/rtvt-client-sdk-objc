@@ -43,7 +43,6 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
 
 
 @property (nonatomic,readonly,strong)NSString * sdkVersion;
-@property (nonatomic,readonly,strong)NSString * apiVersion;
 @property (nonatomic,readonly,assign)RTVTClientConnectStatus currentConnectStatus;
 @property (nonatomic,assign,nullable)id <RTVTProtocol> delegate;
 @property (nonatomic,readonly,assign)int64_t projectId;
@@ -55,6 +54,7 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
 /// @param asrResult 是否需要语音识别的结果
 /// @param transResult 是否需要语音翻译的结果
 /// @param asrTempResult 是否需要临时语音识别的结果
+/// @param userId 用户标识
 /// @param srcLanguage 源语言
 /// @param destLanguage 目标语言
 /// @param srcAltLanguage 备选语言
@@ -63,9 +63,10 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
 -(void)starStreamTranslateWithAsrResult:(BOOL)asrResult
                             transResult:(BOOL)transResult
                           asrTempResult:(BOOL)asrTempResult
+                                 userId:(NSString * _Nullable)userId
                             srcLanguage:(nonnull NSString *)srcLanguage
                            destLanguage:(nonnull NSString *)destLanguage
-                         srcAltLanguage:(nonnull NSArray <NSString*> *) srcAltLanguage
+                         srcAltLanguage:(NSArray <NSString*> * _Nullable) srcAltLanguage
                                 success:(void(^)(int64_t streamId))successCallback
                                    fail:(RTVTAnswerFailCallBack)failCallback;
 

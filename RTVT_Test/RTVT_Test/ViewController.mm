@@ -31,25 +31,10 @@
 
 - (void)viewDidLoad {
 
-    
-    //id印尼语 th泰语 es西语 vi越南语 hi印地语 ar阿语 ms马来语
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-   
-//    @"zh",
-//    @"en",
-//    @"ja",
-//    @"id",
-//    @"th",
-//    @"es",
-//    @"vi",
-//    @"hi",
-//    @"ar",
-//    @"ms",
-
-    
-    
+       
     // =================================================================
     self.secretKey = @"";
     self.projectId = 0;
@@ -59,7 +44,6 @@
     if (self.projectId !=0 && [self.secretKey isEqualToString:@""] == NO) {
         [self setUpUI];
     }
-    
     
 }
 
@@ -237,6 +221,7 @@
         [self.client starStreamTranslateWithAsrResult:YES
                                           transResult:YES
                                         asrTempResult:YES
+                                               userId:@"userId123"
                                           srcLanguage:self.srcLanguageButton.titleLabel.text
                                          destLanguage:self.destLanguageButton.titleLabel.text
                                        srcAltLanguage:@[]
