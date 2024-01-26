@@ -49,11 +49,45 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
 
 
 
+/// 开始翻译 获取streamId  (翻译为多种语言)
+/// @param asrResult 是否需要语音识别的结果
+/// @param tempResult 是否需要临时结果(临时识别和临时翻译)
+/// @param userId 用户标识
+/// @param srcLanguage 源语言
+/// @param srcAltLanguage 备选语言
+/// @param successCallback 成功回调
+/// @param failCallback 失败回调
+-(void)multi_starTranslateWithAsrResult:(BOOL)asrResult
+                             tempResult:(BOOL)tempResult
+                                 userId:(NSString * _Nullable)userId
+                            srcLanguage:(nonnull NSString *)srcLanguage
+                         srcAltLanguage:(NSArray <NSString*> * _Nullable) srcAltLanguage
+                                success:(void(^)(int64_t streamId))successCallback
+                                   fail:(RTVTAnswerFailCallBack)failCallback;
 
-/// 开始翻译 获取streamId
+
+/// 发送音频数据  要求 : pcm 16k 16bit 单声道 每次640byte 20ms  (翻译为多种语言)
+/// @param streamId 流id
+/// @param voiceData 音频数据
+/// @destLanguages 目标语言
+/// @param seq 自增seq 必传
+/// @param ts 音频帧对应时间戳  毫秒 必传
+/// @param successCallback 成功回调
+/// @param failCallback 失败回调
+-(void)multi_sendVoiceWithStreamId:(int64_t)streamId
+                         voiceData:(nonnull NSData*)voiceData
+                     destLanguages:(NSArray<NSString*>*)destLanguages
+                               seq:(int64_t)seq
+                                ts:(int64_t)ts
+                           success:(RTVTAnswerSuccessCallBack)successCallback
+                              fail:(RTVTAnswerFailCallBack)failCallback;
+
+
+
+/// 开始翻译 获取streamId  (翻译为一种语言)
 /// @param asrResult 是否需要语音识别的结果
 /// @param transResult 是否需要语音翻译的结果
-/// @param asrTempResult 是否需要临时语音识别的结果
+/// @param tempResult 是否需要临时结果(临时识别和临时翻译)
 /// @param userId 用户标识
 /// @param srcLanguage 源语言
 /// @param destLanguage 目标语言
@@ -62,7 +96,7 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
 /// @param failCallback 失败回调
 -(void)starStreamTranslateWithAsrResult:(BOOL)asrResult
                             transResult:(BOOL)transResult
-                          asrTempResult:(BOOL)asrTempResult
+                             tempResult:(BOOL)tempResult
                                  userId:(NSString * _Nullable)userId
                             srcLanguage:(nonnull NSString *)srcLanguage
                            destLanguage:(nonnull NSString *)destLanguage
@@ -70,18 +104,8 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
                                 success:(void(^)(int64_t streamId))successCallback
                                    fail:(RTVTAnswerFailCallBack)failCallback;
 
-/// 结束翻译 对应streamId
-/// @param streamId 翻译流id
-/// @param lastSeq seq
-/// @param successCallback 成功回调
-/// @param failCallback 失败回调
--(void)endTranslateWithStreamId:(int64_t)streamId
-                        lastSeq:(int64_t)lastSeq
-                        success:(RTVTAnswerSuccessCallBack)successCallback
-                           fail:(RTVTAnswerFailCallBack)failCallback;
 
-
-/// 发送音频数据  要求 : pcm 16k 16bit 单声道 每次640byte 20ms
+/// 发送音频数据  要求 : pcm 16k 16bit 单声道 每次640byte 20ms  (翻译为一种语言)
 /// @param streamId 流id
 /// @param voiceData 音频数据
 /// @param seq 自增seq 必传
@@ -96,6 +120,17 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
                         fail:(RTVTAnswerFailCallBack)failCallback;
 
 
+/// 结束翻译 对应streamId
+/// @param streamId 翻译流id
+/// @param lastSeq seq
+/// @param successCallback 成功回调
+/// @param failCallback 失败回调
+-(void)endTranslateWithStreamId:(int64_t)streamId
+                        lastSeq:(int64_t)lastSeq
+                        success:(RTVTAnswerSuccessCallBack)successCallback
+                           fail:(RTVTAnswerFailCallBack)failCallback;
+
+
 //使用结束时调用 下次使用需要先登录
 - (BOOL)closeConnect;
 
@@ -107,3 +142,6 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
 
 
 NS_ASSUME_NONNULL_END
+
+
+

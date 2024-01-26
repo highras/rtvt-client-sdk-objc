@@ -66,7 +66,7 @@
 		</data>
 		<key>Headers/RTVTClient.h</key>
 		<data>
-		68X+RjttdNyivIAJZcuhpY3R8xs=
+		sczHdRKHu0zCZOcH1kNe+znp9GQ=
 		</data>
 		<key>Headers/RTVTClientConfig.h</key>
 		<data>
@@ -82,11 +82,11 @@
 		</data>
 		<key>Headers/RTVTProtocol.h</key>
 		<data>
-		yXKHFQreW43BH/p8zQ3XFU/VNqE=
+		gnOHpc0wx+dwiF+vXkz7gL04vfg=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		2ULo9TpRr+76310FAcqvPqeCv00=
+		XLGl+XarVU+5OuKrsHZKcNx49jU=
 		</data>
 		<key>LICENSE.txt</key>
 		<data>
@@ -94,7 +94,7 @@
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
-		/ddGHRcUga5aTlIxN2YdmOaaADo=
+		HKXnSVr48TnySVvFrNJMjwRc//0=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -268,11 +268,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			68X+RjttdNyivIAJZcuhpY3R8xs=
+			sczHdRKHu0zCZOcH1kNe+znp9GQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			mRznt6TH6wK3t+icGMtTsgiH1ci/Qyqjn43P9BOXHyM=
+			oCE62TDD2BELZWb2F3v6EQ9VnuDERhr/vqQb6VtJqAc=
 			</data>
 		</dict>
 		<key>Headers/RTVTClientConfig.h</key>
@@ -312,11 +312,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			yXKHFQreW43BH/p8zQ3XFU/VNqE=
+			gnOHpc0wx+dwiF+vXkz7gL04vfg=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZNtPxcG4DOa81WklG0H0dZKZFXzWSLzLyqFsY2/lXqU=
+			dRJC2uj1l4fEz+AvrLarpMTl3xzx+bdAK/+3uv+TnYo=
 			</data>
 		</dict>
 		<key>LICENSE.txt</key>
@@ -334,11 +334,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			/ddGHRcUga5aTlIxN2YdmOaaADo=
+			HKXnSVr48TnySVvFrNJMjwRc//0=
 			</data>
 			<key>hash2</key>
 			<data>
-			pr8C+Htghv0S45/SkKkJ5qr4JDnCrBw3p8/22cWqNrY=
+			15UvsXtxo3B7BKLa/gIDnMpNksMGMzoDKNJbAvvVbA0=
 			</data>
 		</dict>
 	</dict>

@@ -38,8 +38,10 @@
     // =================================================================
     self.secretKey = @"";
     self.projectId = 0;
+    self.endpoint = @"rtvt.ilivedata.com:14001";
     // =================================================================
     
+   
     
     if (self.projectId !=0 && [self.secretKey isEqualToString:@""] == NO) {
         [self setUpUI];
@@ -59,7 +61,7 @@
         
         if (self.client == nil) {
 
-            self.client = [RTVTClient clientWithEndpoint:@"rtvt.ilivedata.com:14001"
+            self.client = [RTVTClient clientWithEndpoint:self.endpoint
                                                projectId:self.projectId
                                                 delegate:self];
             
@@ -220,7 +222,7 @@
         [self showLoadHud];
         [self.client starStreamTranslateWithAsrResult:YES
                                           transResult:YES
-                                        asrTempResult:YES
+                                           tempResult:YES
                                                userId:@"userId123"
                                           srcLanguage:self.srcLanguageButton.titleLabel.text
                                          destLanguage:self.destLanguageButton.titleLabel.text
@@ -232,6 +234,10 @@
             @synchronized (self) {
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    self.tmpResultString = @"";
+                    self.tmpTransResultString = @"";
+                    
                     
                     [self.recognizedResultArray removeAllObjects];
                     [self.translatedResultArray removeAllObjects];
@@ -400,46 +406,100 @@
                             startTs:(int64_t)startTs
                               endTs:(int64_t)endTs
                              result:(NSString * _Nullable)result
+                           language:(NSString * _Nullable)language
                               recTs:(int64_t)recTs{
     
-//    NSLog(@"翻译结果 = %@   streamId = %lld %lld",result,streamId,startTs);
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.translatedResultArray addObject:result];
         [self.translatedTableView reloadData];
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.translatedResultArray.count - 1 inSection:0];
-        [self.translatedTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        if (self.recognizedResultArray.count>2) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.translatedResultArray.count inSection:0];
+            [self.translatedTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            
+        }
+        
     });
     
+    
 }
+//语音临时翻译
+-(void)translatedTmpResultWithStreamId:(int64_t)streamId
+                               startTs:(int64_t)startTs
+                                 endTs:(int64_t)endTs
+                                result:(NSString * _Nullable)result
+                              language:(NSString * _Nullable)language
+                                 recTs:(int64_t)recTs{
 
+                  
+                   
+    
+    NSLog(@"翻译临时结果 ===== %@ ===== %@",result,language);
+        
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        
+//        int64_t ts = [[NSDate date] timeIntervalSince1970] * 1000;
+            self.tmpTransResultString = result;
+            [self.translatedTableView reloadData];
+            if (self.translatedResultArray.count > 2) {
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.translatedResultArray.count  inSection:0];
+                [self.translatedTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            }
+        
+        
+        
+    });
+    
+    
+    
+}
 
 //语音识别
 -(void)recognizedResultWithStreamId:(int64_t)streamId
                             startTs:(int64_t)startTs
                               endTs:(int64_t)endTs
                              result:(NSString * _Nullable)result
+                           language:(NSString * _Nullable)language
                               recTs:(int64_t)recTs{
     
-//    NSLog(@"识别结果 = %@   streamId = %lld %lld",result,streamId,startTs);
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.recognizedResultArray addObject:result];
         [self.recognizedTableView reloadData];
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.recognizedResultArray.count - 1 inSection:0];
-        [self.recognizedTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        if (self.recognizedResultArray.count>2) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.recognizedResultArray.count  inSection:0];
+            [self.recognizedTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+        
     });
     
 }
 
-//识别中间结果
+//识别临时结果
 -(void)recognizedTmpResultWithStreamId:(int64_t)streamId
                                startTs:(int64_t)startTs
                                  endTs:(int64_t)endTs
                                 result:(NSString * _Nullable)result
+                              language:(NSString * _Nullable)language
                                  recTs:(int64_t)recTs{
     
+    NSLog(@"识别临时结果 ===== %@ ===== %@",result,language);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+            self.tmpResultString = result;
+            [self.recognizedTableView reloadData];
+            if (self.recognizedResultArray.count > 2) {
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.recognizedResultArray.count  inSection:0];
+                [self.recognizedTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            }
+
+    });
     
     
 }
+
+
 //重连将要开始  根据返回值是否进行重连
 -(BOOL)rtvtReloginWillStart:(RTVTClient *)client reloginCount:(int)reloginCount{
     
@@ -463,7 +523,7 @@
         
         if (reloginResult == YES) {
             
-            [self showHudMessage:@"重连成功" hideTime:2];
+            [self showHudMessage:@"重连成功,请拉取新的streamId" hideTime:2];
             
         }else{
             

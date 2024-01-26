@@ -46,6 +46,10 @@
 
 @property(nonatomic,strong)UILabel * recognitionTitle;
 @property(nonatomic,strong)UILabel * translateTitle;
+
+@property(nonatomic,strong)NSString * tmpResultString;
+@property(nonatomic,strong)NSString * tmpTransResultString;
+@property(nonatomic,strong)NSString * endpoint;
 @end
 
 

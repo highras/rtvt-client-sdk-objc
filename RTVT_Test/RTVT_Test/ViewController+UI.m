@@ -79,6 +79,11 @@
     
     self.translatedResultArray = [NSMutableArray array];
     self.recognizedResultArray = [NSMutableArray array];
+    
+    self.tmpResultString = @"";
+    self.tmpTransResultString = @"";
+    
+    
     [self.bgScrollView addSubview:self.recognitionTitle];
     [self.recognitionTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.streamIdButton.mas_bottom).offset(30);
@@ -119,30 +124,45 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (tableView == self.translatedTableView) {
-        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellId"];
+        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellId1"];
         
         if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellId"];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellId1"];
             cell.backgroundColor = [UIColor blackColor];
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.textLabel.font = [UIFont systemFontOfSize:12];
             cell.textLabel.numberOfLines = 0;
         }
+        
         if([self.destLanguageButton.titleLabel.text isEqualToString:@"ar"]){
             cell.textLabel.textAlignment = NSTextAlignmentRight;
         }else{
             cell.textLabel.textAlignment = NSTextAlignmentLeft;
         }
-        cell.textLabel.text = [self.translatedResultArray objectAtIndex:indexPath.row];
+
+        
+        
+        if (indexPath.row == self.translatedResultArray.count) {
+            cell.textLabel.text = self.tmpTransResultString;
+            cell.textLabel.textColor = [UIColor systemPinkColor];
+            
+        }else{
+            
+            if (self.translatedResultArray.count - 1 >= indexPath.row ) {
+                cell.textLabel.text = [self.translatedResultArray objectAtIndex:indexPath.row];
+                cell.textLabel.textColor = [UIColor whiteColor];
+            }
+            
+        }
         
         return cell;
         
-    }else{
+    }else if(tableView == self.recognizedTableView){
         
-        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellId"];
+        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellId2"];
         
         if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellId"];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellId2"];
             cell.backgroundColor = [UIColor blackColor];
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.textLabel.font = [UIFont systemFontOfSize:12];
@@ -153,10 +173,31 @@
         }else{
             cell.textLabel.textAlignment = NSTextAlignmentLeft;
         }
-        cell.textLabel.text = [self.recognizedResultArray objectAtIndex:indexPath.row];
+        
+        
+        
+        if (indexPath.row == self.recognizedResultArray.count) {
+            cell.textLabel.text = self.tmpResultString;
+            cell.textLabel.textColor = [UIColor systemPinkColor];
+            
+        }else{
+            
+            if (self.recognizedResultArray.count - 1 >= indexPath.row ) {
+                cell.textLabel.text = [self.recognizedResultArray objectAtIndex:indexPath.row];
+                cell.textLabel.textColor = [UIColor whiteColor];
+            }
+            
+        }
+        
         
         return cell;
+        
+    }else{
+        
+        return nil;
+        
     }
+    
     
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -166,11 +207,11 @@
     
     if (tableView == self.translatedTableView) {
         
-        return self.translatedResultArray.count;
+        return self.translatedResultArray.count +1;
         
     }else{
         
-        return self.recognizedResultArray.count;
+        return self.recognizedResultArray.count +1;
     }
 }
 
