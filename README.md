@@ -102,6 +102,18 @@
                               language:(NSString * _Nullable)language
                                  recTs:(int64_t)recTs
                                 taskId:(int64_t)taskId;
+
+
+/// 语音合成
+/// - Parameters:
+///   - streamId: 翻译流id
+///   - text: 翻译结果
+///   - data: 结果音频数据 mp3 单声道 16000hz
+///   - language: 目标语言
+-(void)ttsResultWithStreamId:(int64_t)streamId
+                        text:(NSString * _Nullable)text
+                        data:(NSData*)data
+                    language:(NSString * _Nullable)language;
 ```
 
 #### 登录
