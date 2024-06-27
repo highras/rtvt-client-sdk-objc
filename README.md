@@ -225,7 +225,7 @@
 ```objc {.line-numbers}
 - (BOOL)closeConnect;
 ```
-{{% notice info %}}注意，使用结束时调用。下次使用需要先登录。{{% /notice %}}
+注意，使用结束时调用。下次使用需要先登录。
 
 #### 错误码
 | 错误码 |  说明 |
