@@ -51,9 +51,12 @@
 		56659F2D28ADD96D006F635E /* zh.wav in Resources */ = {isa = PBXBuildFile; fileRef = 56659F2B28ADD96D006F635E /* zh.wav */; };
 		566E18A22994900B004CA9B9 /* GetToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 566E18A12994900B004CA9B9 /* GetToken.m */; };
 		566E18A529949074004CA9B9 /* VoiceCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 566E18A429949074004CA9B9 /* VoiceCapture.m */; };
-		566E18A72994909A004CA9B9 /* RTVT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 566E18A629949099004CA9B9 /* RTVT.framework */; };
 		56C292EF29D696220008254C /* id.wav in Resources */ = {isa = PBXBuildFile; fileRef = 56C292ED29D696220008254C /* id.wav */; };
 		56C292F029D696220008254C /* id.pcm in Resources */ = {isa = PBXBuildFile; fileRef = 56C292EE29D696220008254C /* id.pcm */; };
+		84EFD4E42C2AB13B00424AFF /* Fpnn.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EFD4E22C2AB13B00424AFF /* Fpnn.xcframework */; };
+		84EFD4E52C2AB13B00424AFF /* RTVT.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EFD4E32C2AB13B00424AFF /* RTVT.xcframework */; };
+		84EFD4E82C2AB28D00424AFF /* LDMp3ToPcm.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84EFD4E72C2AB28D00424AFF /* LDMp3ToPcm.mm */; };
+		84EFD4ED2C2AB31100424AFF /* libsamplerate.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EFD4EC2C2AB31100424AFF /* libsamplerate.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,9 +146,16 @@
 		566E18A12994900B004CA9B9 /* GetToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetToken.m; sourceTree = "<group>"; };
 		566E18A329949074004CA9B9 /* VoiceCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceCapture.h; sourceTree = "<group>"; };
 		566E18A429949074004CA9B9 /* VoiceCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceCapture.m; sourceTree = "<group>"; };
-		566E18A629949099004CA9B9 /* RTVT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RTVT.framework; sourceTree = "<group>"; };
 		56C292ED29D696220008254C /* id.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = id.wav; sourceTree = "<group>"; };
 		56C292EE29D696220008254C /* id.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = id.pcm; sourceTree = "<group>"; };
+		84EFD4E22C2AB13B00424AFF /* Fpnn.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Fpnn.xcframework; sourceTree = "<group>"; };
+		84EFD4E32C2AB13B00424AFF /* RTVT.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = RTVT.xcframework; sourceTree = "<group>"; };
+		84EFD4E62C2AB28D00424AFF /* LDMp3ToPcm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDMp3ToPcm.h; sourceTree = "<group>"; };
+		84EFD4E72C2AB28D00424AFF /* LDMp3ToPcm.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LDMp3ToPcm.mm; sourceTree = "<group>"; };
+		84EFD4E92C2AB31100424AFF /* minimp3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = minimp3.h; sourceTree = "<group>"; };
+		84EFD4EA2C2AB31100424AFF /* minimp3_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = minimp3_ex.h; sourceTree = "<group>"; };
+		84EFD4EB2C2AB31100424AFF /* samplerate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = samplerate.h; sourceTree = "<group>"; };
+		84EFD4EC2C2AB31100424AFF /* libsamplerate.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libsamplerate.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,9 +163,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84EFD4ED2C2AB31100424AFF /* libsamplerate.xcframework in Frameworks */,
+				84EFD4E42C2AB13B00424AFF /* Fpnn.xcframework in Frameworks */,
 				561D3AFD28A0C06A00FEDE63 /* libresolv.9.tbd in Frameworks */,
-				566E18A72994909A004CA9B9 /* RTVT.framework in Frameworks */,
 				56659F0528AA3F6E006F635E /* AVFoundation.framework in Frameworks */,
+				84EFD4E52C2AB13B00424AFF /* RTVT.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,7 +191,8 @@
 		561D3ABA28A0BE8900FEDE63 = {
 			isa = PBXGroup;
 			children = (
-				566E18A629949099004CA9B9 /* RTVT.framework */,
+				84EFD4E22C2AB13B00424AFF /* Fpnn.xcframework */,
+				84EFD4E32C2AB13B00424AFF /* RTVT.xcframework */,
 				561D3B0028A3611C00FEDE63 /* Masonry */,
 				561D3B1A28A3611C00FEDE63 /* MBProgressHUD.h */,
 				561D3B1B28A3611C00FEDE63 /* MBProgressHUD.m */,
@@ -204,6 +217,7 @@
 		561D3AC528A0BE8900FEDE63 /* RTVT_Test */ = {
 			isa = PBXGroup;
 			children = (
+				84EFD4EE2C2AB31700424AFF /* Mp3ToPcm */,
 				56659F1628AC90DA006F635E /* en.pcm */,
 				56659F1928AC90DC006F635E /* ja.pcm */,
 				56659F1728AC90DB006F635E /* th.pcm */,
@@ -300,6 +314,19 @@
 				561D3B1928A3611C00FEDE63 /* MASViewAttribute.m */,
 			);
 			path = Masonry;
+			sourceTree = "<group>";
+		};
+		84EFD4EE2C2AB31700424AFF /* Mp3ToPcm */ = {
+			isa = PBXGroup;
+			children = (
+				84EFD4E62C2AB28D00424AFF /* LDMp3ToPcm.h */,
+				84EFD4E72C2AB28D00424AFF /* LDMp3ToPcm.mm */,
+				84EFD4EC2C2AB31100424AFF /* libsamplerate.xcframework */,
+				84EFD4EA2C2AB31100424AFF /* minimp3_ex.h */,
+				84EFD4E92C2AB31100424AFF /* minimp3.h */,
+				84EFD4EB2C2AB31100424AFF /* samplerate.h */,
+			);
+			path = Mp3ToPcm;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -469,6 +496,7 @@
 				561D3B2228A3611C00FEDE63 /* View+MASAdditions.m in Sources */,
 				561D3B1C28A3611C00FEDE63 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				561D3B2528A3611C00FEDE63 /* MASViewAttribute.m in Sources */,
+				84EFD4E82C2AB28D00424AFF /* LDMp3ToPcm.mm in Sources */,
 				561D3B2628A3611C00FEDE63 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

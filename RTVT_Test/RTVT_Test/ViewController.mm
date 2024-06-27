@@ -12,6 +12,10 @@
 #import <AVFoundation/AVFoundation.h>
 #import <CoreTelephony/CTCellularData.h>
 #import "GetToken.h"
+#import "LDMp3ToPcm.h"
+
+#define LD_PATH_Tmp(name) [NSTemporaryDirectory() stringByAppendingPathComponent:name]
+
 @interface ViewController ()
 
 
@@ -34,7 +38,6 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-       
     // =================================================================
     self.secretKey = @"";
     self.projectId = 0;
@@ -138,6 +141,15 @@
     [cancel setValue:[UIColor redColor] forKey:@"titleTextColor"];
     [alertVc addAction:cancel];
     
+    UIPopoverPresentationController *popver = alertVc.popoverPresentationController;
+    if(popver){
+
+        popver.sourceView = self.destLanguageButton;
+        popver.sourceRect = self.destLanguageButton.bounds;
+        popver.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        
+    }
+    
     [self presentViewController:alertVc animated:YES completion:nil];
     
 }
@@ -160,6 +172,15 @@
     }];
     [cancel setValue:[UIColor redColor] forKey:@"titleTextColor"];
     [alertVc addAction:cancel];
+    
+    UIPopoverPresentationController *popver = alertVc.popoverPresentationController;
+    if(popver){
+
+        popver.sourceView = self.srcLanguageButton;
+        popver.sourceRect = self.srcLanguageButton.bounds;
+        popver.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        
+    }
     
     [self presentViewController:alertVc animated:YES completion:nil];
     
@@ -223,6 +244,7 @@
         [self.client starStreamTranslateWithAsrResult:YES
                                           transResult:YES
                                            tempResult:YES
+                                            ttsResult:NO
                                                userId:@"userId123"
                                           srcLanguage:self.srcLanguageButton.titleLabel.text
                                          destLanguage:self.destLanguageButton.titleLabel.text
@@ -351,6 +373,7 @@
     self.audioPlayer = nil;
     self.audioPlayer = [[AVAudioPlayer alloc] initWithData:[NSData dataWithContentsOfFile:filePath] error:nil];
     [self.audioPlayer play];
+    
 }
 -(void)_closeSend{
     
@@ -407,7 +430,8 @@
                               endTs:(int64_t)endTs
                              result:(NSString * _Nullable)result
                            language:(NSString * _Nullable)language
-                              recTs:(int64_t)recTs{
+                              recTs:(int64_t)recTs 
+                             taskId:(int64_t)taskId{
     
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -429,7 +453,8 @@
                                  endTs:(int64_t)endTs
                                 result:(NSString * _Nullable)result
                               language:(NSString * _Nullable)language
-                                 recTs:(int64_t)recTs{
+                                 recTs:(int64_t)recTs
+                                taskId:(int64_t)taskId{
 
                   
                    
@@ -461,7 +486,8 @@
                               endTs:(int64_t)endTs
                              result:(NSString * _Nullable)result
                            language:(NSString * _Nullable)language
-                              recTs:(int64_t)recTs{
+                              recTs:(int64_t)recTs
+                             taskId:(int64_t)taskId{
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.recognizedResultArray addObject:result];
@@ -481,7 +507,8 @@
                                  endTs:(int64_t)endTs
                                 result:(NSString * _Nullable)result
                               language:(NSString * _Nullable)language
-                                 recTs:(int64_t)recTs{
+                                 recTs:(int64_t)recTs
+                                taskId:(int64_t)taskId{
     
     NSLog(@"识别临时结果 ===== %@ ===== %@",result,language);
     
@@ -499,7 +526,24 @@
     
 }
 
-
+-(void)ttsResultWithStreamId:(int64_t)streamId text:(NSString *)text data:(NSData *)data language:(NSString *)language{
+    
+    int64_t ts = [[NSDate date] timeIntervalSince1970] * 1000;
+    NSString * path = [NSString stringWithFormat:@"tmp_pcm_%lld",ts];
+    if ([[NSFileManager defaultManager] createFileAtPath:LD_PATH_Tmp(path) contents:data attributes:nil]) {
+        
+        
+        NSData * pcm = [LDMp3ToPcm getPcmData:LD_PATH_Tmp(path) sampleRate:16000];
+        if (pcm != nil) {
+            NSLog(@"成功");
+        }else{
+            NSLog(@"失败");
+        }
+        
+        [[NSFileManager defaultManager] removeItemAtPath:LD_PATH_Tmp(path) error:nil];
+    }
+    
+}
 //重连将要开始  根据返回值是否进行重连
 -(BOOL)rtvtReloginWillStart:(RTVTClient *)client reloginCount:(int)reloginCount{
     
