@@ -50,7 +50,8 @@
                               endTs:(int64_t)endTs
                              result:(NSString * _Nullable)result
                            language:(NSString * _Nullable)language
-                              recTs:(int64_t)recTs;
+                              recTs:(int64_t)recTs
+                             taskId:(int64_t)taskId;
 
 /// 识别最终结果
 /// - Parameters:
@@ -65,7 +66,8 @@
                               endTs:(int64_t)endTs
                              result:(NSString * _Nullable)result
                            language:(NSString * _Nullable)language
-                              recTs:(int64_t)recTs;
+                              recTs:(int64_t)recTs
+                             taskId:(int64_t)taskId;
 
 
 /// 翻译临时结果
@@ -81,7 +83,8 @@
                                  endTs:(int64_t)endTs
                                 result:(NSString * _Nullable)result
                               language:(NSString * _Nullable)language
-                                 recTs:(int64_t)recTs;
+                                 recTs:(int64_t)recTs
+                                taskId:(int64_t)taskId;
 
 
 /// 识别临时结果
@@ -97,7 +100,8 @@
                                  endTs:(int64_t)endTs
                                 result:(NSString * _Nullable)result
                               language:(NSString * _Nullable)language
-                                 recTs:(int64_t)recTs;
+                                 recTs:(int64_t)recTs
+                                taskId:(int64_t)taskId;
 ```
 
 #### 登录
@@ -120,6 +124,7 @@
 -(void)starStreamTranslateWithAsrResult:(BOOL)asrResult
                             transResult:(BOOL)transResult
                              tempResult:(BOOL)tempResult
+                              ttsResult:(BOOL)ttsResult
                                  userId:(NSString * _Nullable)userId
                             srcLanguage:(nonnull NSString *)srcLanguage
                            destLanguage:(nonnull NSString *)destLanguage
@@ -133,6 +138,7 @@
 | transResult   | bool  | 必需 | 设置是否需要翻译结果  |
 | tempResult   | bool  | 必需 | 设置是否需要临时结果|
 | userId  | string | 可选 | 用户id，业务侧可自行按需传入  |
+| ttsResult  | bool | 可选 | 翻译后的语音，业务侧可自行按需传入  |
 | srcLanguage | string | 必需 | 源语言  |
 | destLanguage | string  | 必需 | 目标语言，如果只需转写功能，目标语言可以可传空字符串  |
 | srcAltLanguage   | array  | 可选 | 源语言的备选语言范围，最多支持3个语种传入  |
