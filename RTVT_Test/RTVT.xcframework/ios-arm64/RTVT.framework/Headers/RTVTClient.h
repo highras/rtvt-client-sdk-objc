@@ -20,7 +20,13 @@ typedef NS_ENUM(NSInteger, RTVTClientConnectStatus){
     RTVTClientConnectStatusConnected = 2,
     
 };
-
+typedef NS_ENUM(NSInteger, RTVTAudioDataCodecType){
+    
+    PCM = 0,
+    OPUS = 1,
+   
+    
+};
 typedef void (^RTVTLoginSuccessCallBack)(void);
 typedef void (^RTVTLoginFailCallBack)(FPNError * _Nullable error);
 
@@ -89,20 +95,26 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
 /// @param transResult 是否需要语音翻译的结果
 /// @param tempResult 是否需要临时结果(临时识别和临时翻译)
 /// @param ttsResult 是否需要返回翻译结果音频文件(mp3)
+/// @param ttsSpeaker tts音色设置
 /// @param userId 用户标识
 /// @param srcLanguage 源语言
 /// @param destLanguage 目标语言
 /// @param srcAltLanguage 备选语言
+/// @param codecType 编码类型
+/// @param attribute 属性自定义
 /// @param successCallback 成功回调
 /// @param failCallback 失败回调
 -(void)starStreamTranslateWithAsrResult:(BOOL)asrResult
                             transResult:(BOOL)transResult
                              tempResult:(BOOL)tempResult
                               ttsResult:(BOOL)ttsResult
+                             ttsSpeaker:(NSString * _Nullable)ttsSpeaker
                                  userId:(NSString * _Nullable)userId
                             srcLanguage:(nonnull NSString *)srcLanguage
                            destLanguage:(nonnull NSString *)destLanguage
                          srcAltLanguage:(NSArray <NSString*> * _Nullable) srcAltLanguage
+                              codecType:(RTVTAudioDataCodecType)codecType
+                              attribute:(NSString * _Nullable)attribute
                                 success:(void(^)(int64_t streamId))successCallback
                                    fail:(RTVTAnswerFailCallBack)failCallback;
 

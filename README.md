@@ -120,10 +120,14 @@
 -(void)starStreamTranslateWithAsrResult:(BOOL)asrResult
                             transResult:(BOOL)transResult
                              tempResult:(BOOL)tempResult
+                              ttsResult:(BOOL)ttsResult
+                             ttsSpeaker:(NSString * _Nullable)ttsSpeaker
                                  userId:(NSString * _Nullable)userId
                             srcLanguage:(nonnull NSString *)srcLanguage
                            destLanguage:(nonnull NSString *)destLanguage
                          srcAltLanguage:(NSArray <NSString*> * _Nullable) srcAltLanguage
+                              codecType:(RTVTAudioDataCodecType)codecType
+                              attribute:(NSString * _Nullable)attribute
                                 success:(void(^)(int64_t streamId))successCallback
                                    fail:(RTVTAnswerFailCallBack)failCallback;
 ```
@@ -132,10 +136,14 @@
 | asrResult  | bool   | 必需 | 设置是否需要语音识别结果  |
 | transResult   | bool  | 必需 | 设置是否需要翻译结果  |
 | tempResult   | bool  | 必需 | 设置是否需要临时结果|
+| ttsResult   | bool  | 必需 | 设置是否需要语音结果|
+| ttsSpeaker   | string  | 可选 | 设置音色|
 | userId  | string | 可选 | 用户id，业务侧可自行按需传入  |
 | srcLanguage | string | 必需 | 源语言  |
 | destLanguage | string  | 必需 | 目标语言，如果只需转写功能，目标语言可以可传空字符串  |
 | srcAltLanguage   | array  | 可选 | 源语言的备选语言范围，最多支持3个语种传入  |
+| codecType | int | 必需 | 上传数据的编码类型  |
+| attribute | string | 可选 | 属性自定义  |
 | callback   | -  | - | 成功后，服务端生成streamId并回调给SDK  |
 
 
@@ -225,12 +233,15 @@
 | 错误码 |  说明 |
 |:---:|:---:|
 | 800000 | 未知错误  |
-| 800001   | 未验证的链接  |
-| 800002   | 登录失败  |
-| 800003   | token已过期  |
-| 800004   | 无效的验证时间  |
-| 800005   | 无效token  |
-| 800006   | 音频流不存在  |
+| 800002   | 未验证的链接  |
+| 800003   | 无效参数  |
+| 800101   | 无效的系统时间  |
+| 800102   | token非法，无效编码  |
+| 800103   | 无效的pid  |
+| 800105   | 不支持的语言  |
+| 800106   | 备选语言过多  |
+| 800107   | 翻译流到达上限  |
+| 800200   | 流id不存在  |
 
 ### SDK下载
 SDK下载和更多说明请前往[Github](https://github.com/highras/rtvt-client-sdk-objc)。

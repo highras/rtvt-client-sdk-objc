@@ -39,7 +39,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     // =================================================================
-    self.secretKey = @"";
+    self.secretKey = @"0";
     self.projectId = 0;
     self.endpoint = @"rtvt.ilivedata.com:14001";
     // =================================================================
@@ -245,10 +245,13 @@
                                           transResult:YES
                                            tempResult:YES
                                             ttsResult:NO
+                                           ttsSpeaker:nil
                                                userId:@"userId123"
                                           srcLanguage:self.srcLanguageButton.titleLabel.text
                                          destLanguage:self.destLanguageButton.titleLabel.text
                                        srcAltLanguage:@[]
+                                            codecType:PCM
+                                            attribute:nil
                                               success:^(int64_t streamId) {
             
             [self showHudMessage:[NSString stringWithFormat:@"获取streamId成功 id = %lld 开始测试",streamId] hideTime:2];
