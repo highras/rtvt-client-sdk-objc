@@ -263,8 +263,8 @@
 
 
 ### 注意事项
-1.sendVoice一段时间不发数据会过期  过期返回错误码800200 需要重新拉一个streamId
-2.网络不好时断线自动重连成功后(RTVTProtocol rtvtReloginCompleted  reloginResult == YES ) 也需要拉一个streamId
+- sendVoice一段时间不发数据会过期  过期返回错误码800200 需要重新拉一个streamId
+- 网络不好时断线自动重连成功后(RTVTProtocol rtvtReloginCompleted  reloginResult == YES ) 也需要拉一个streamId
 
 ### SDK下载
 SDK下载和更多说明请前往[Github](https://github.com/highras/rtvt-client-sdk-objc)。
