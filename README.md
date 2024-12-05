@@ -262,7 +262,7 @@
 | 800200   | 流id不存在  |
 
 
-### 注意事项
+### $\color{red}{注意事项}$
 - sendVoice一段时间不发数据会过期  过期返回错误码800200 需要重新拉一个streamId
 - 网络不好时断线自动重连成功后(RTVTProtocol rtvtReloginCompleted  reloginResult == YES ) 也需要拉一个streamId
 
