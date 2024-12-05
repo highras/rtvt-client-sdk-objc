@@ -101,7 +101,7 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
 /// @param destLanguage 目标语言
 /// @param srcAltLanguage 备选语言
 /// @param codecType 编码类型
-/// @param attribute 属性自定义
+/// @param attribute 自定义属性
 /// @param successCallback 成功回调
 /// @param failCallback 失败回调
 -(void)starStreamTranslateWithAsrResult:(BOOL)asrResult
