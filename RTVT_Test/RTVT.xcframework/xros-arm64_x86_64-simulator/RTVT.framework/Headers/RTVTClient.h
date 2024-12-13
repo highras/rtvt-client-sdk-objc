@@ -63,13 +63,13 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
 /// @param srcAltLanguage 备选语言
 /// @param successCallback 成功回调
 /// @param failCallback 失败回调
--(void)multi_starTranslateWithAsrResult:(BOOL)asrResult
-                             tempResult:(BOOL)tempResult
-                                 userId:(NSString * _Nullable)userId
-                            srcLanguage:(nonnull NSString *)srcLanguage
-                         srcAltLanguage:(NSArray <NSString*> * _Nullable) srcAltLanguage
-                                success:(void(^)(int64_t streamId))successCallback
-                                   fail:(RTVTAnswerFailCallBack)failCallback;
+-(void)multi_startTranslateWithAsrResult:(BOOL)asrResult
+                              tempResult:(BOOL)tempResult
+                                  userId:(NSString * _Nullable)userId
+                             srcLanguage:(nonnull NSString *)srcLanguage
+                          srcAltLanguage:(NSArray <NSString*> * _Nullable) srcAltLanguage
+                                 success:(void(^)(int64_t streamId))successCallback
+                                    fail:(RTVTAnswerFailCallBack)failCallback;
 
 
 /// 发送音频数据  要求 : pcm 16k 16bit 单声道 每次640byte 20ms  (翻译为多种语言)
@@ -104,19 +104,19 @@ typedef void (^RTVTAnswerFailCallBack)(FPNError * _Nullable error);
 /// @param attribute 自定义属性
 /// @param successCallback 成功回调
 /// @param failCallback 失败回调
--(void)starStreamTranslateWithAsrResult:(BOOL)asrResult
-                            transResult:(BOOL)transResult
-                             tempResult:(BOOL)tempResult
-                              ttsResult:(BOOL)ttsResult
-                             ttsSpeaker:(NSString * _Nullable)ttsSpeaker
-                                 userId:(NSString * _Nullable)userId
-                            srcLanguage:(nonnull NSString *)srcLanguage
-                           destLanguage:(nonnull NSString *)destLanguage
-                         srcAltLanguage:(NSArray <NSString*> * _Nullable) srcAltLanguage
-                              codecType:(RTVTAudioDataCodecType)codecType
-                              attribute:(NSString * _Nullable)attribute
-                                success:(void(^)(int64_t streamId))successCallback
-                                   fail:(RTVTAnswerFailCallBack)failCallback;
+-(void)startStreamTranslateWithAsrResult:(BOOL)asrResult
+                             transResult:(BOOL)transResult
+                              tempResult:(BOOL)tempResult
+                               ttsResult:(BOOL)ttsResult
+                              ttsSpeaker:(NSString * _Nullable)ttsSpeaker
+                                  userId:(NSString * _Nullable)userId
+                             srcLanguage:(nonnull NSString *)srcLanguage
+                            destLanguage:(nonnull NSString *)destLanguage
+                          srcAltLanguage:(NSArray <NSString*> * _Nullable) srcAltLanguage
+                               codecType:(RTVTAudioDataCodecType)codecType
+                               attribute:(NSString * _Nullable)attribute
+                                 success:(void(^)(int64_t streamId))successCallback
+                                    fail:(RTVTAnswerFailCallBack)failCallback;
 
 
 /// 发送音频数据  要求 : pcm 16k 16bit 单声道 每次640byte 20ms  (翻译为一种语言)

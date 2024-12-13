@@ -241,7 +241,7 @@
     if (self.streamId == 0) {
         
         [self showLoadHud];
-        [self.client starStreamTranslateWithAsrResult:YES
+        [self.client startStreamTranslateWithAsrResult:YES
                                           transResult:YES
                                            tempResult:YES
                                             ttsResult:NO

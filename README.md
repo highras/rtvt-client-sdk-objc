@@ -134,7 +134,7 @@
 
 #### 开始实时语音翻译
 ```objc {.line-numbers}
--(void)starStreamTranslateWithAsrResult:(BOOL)asrResult
+-(void)startStreamTranslateWithAsrResult:(BOOL)asrResult
                             transResult:(BOOL)transResult
                              tempResult:(BOOL)tempResult
                               ttsResult:(BOOL)ttsResult
@@ -166,7 +166,7 @@
 
 
 ```objc {.line-numbers}
--(void)multi_starTranslateWithAsrResult:(BOOL)asrResult
+-(void)multi_startTranslateWithAsrResult:(BOOL)asrResult
                              tempResult:(BOOL)tempResult
                                  userId:(NSString * _Nullable)userId
                             srcLanguage:(nonnull NSString *)srcLanguage
